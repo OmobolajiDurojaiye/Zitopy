@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zitopy - Student Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo-container">
+          <h2 class="logo">Zitopy</h2>
+          <span class="logo-dot">.</span>
+        </div>
+
+        <div class="profile-section">
+          <div class="profile-image">
+            <img src="/api/placeholder/150/150" alt="Profile Picture" />
+          </div>
+          <h3 class="user-name">Ransom Philemon</h3>
+          <p class="user-email">ransom@zitopy.com</p>
+        </div>
+
+        <nav class="sidebar-menu">
+          <ul>
+            <li class="active">
+              <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-book"></i> My Courses</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-tasks"></i> Progress</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-certificate"></i> Certificates</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-comment-alt"></i> Community</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-question-circle"></i> Support</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span>
+          </button>
+          <a href="#" class="logout-btn"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="dashboard-header">
+          <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search for courses, lessons..." />
+          </div>
+          <div class="header-actions">
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-indicator"></span>
+            </div>
+            <div class="header-profile">
+              <img src="/api/placeholder/40/40" alt="Profile" />
+              <span>Alex Johnson</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </header>
+
+        <section class="welcome-section">
+          <div class="welcome-text">
+            <h1>Welcome back, Ransom! 👋</h1>
+            <p>Continue where you left off and keep learning.</p>
+          </div>
+          <div class="learning-stats">
+            <div class="stat-card">
+              <i class="fas fa-clock"></i>
+              <div class="stat-info">
+                <h3>12.5 hours</h3>
+                <p>Learning Time</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fas fa-trophy"></i>
+              <div class="stat-info">
+                <h3>4 Courses</h3>
+                <p>In Progress</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fas fa-certificate"></i>
+              <div class="stat-info">
+                <h3>3 Certificates</h3>
+                <p>Completed</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="current-course-section">
+          <div class="section-header">
+            <h2>Continue Learning</h2>
+            <a href="#" class="view-all">View All</a>
+          </div>
+          <div class="courses-grid">
+            <!-- Course Card 1 -->
+            <div class="course-card">
+              <div class="course-progress">
+                <div class="progress-bar">
+                  <div class="progress" style="width: 65%"></div>
+                </div>
+                <span class="progress-text">65% Complete</span>
+              </div>
+              <div class="course-info">
+                <h3>Web Development Fundamentals</h3>
+                <p>Learn HTML, CSS, and JavaScript basics</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-play-circle"></i> 24/32 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 12h 30m</span>
+                </div>
+              </div>
+              <div class="course-action">
+                <button class="continue-btn">Continue</button>
+              </div>
+            </div>
+
+            <!-- Course Card 2 -->
+            <div class="course-card">
+              <div class="course-progress">
+                <div class="progress-bar">
+                  <div class="progress" style="width: 30%"></div>
+                </div>
+                <span class="progress-text">30% Complete</span>
+              </div>
+              <div class="course-info">
+                <h3>Blockchain Development</h3>
+                <p>Learn blockchain fundamentals and smart contracts</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-play-circle"></i> 8/28 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 6h 45m</span>
+                </div>
+              </div>
+              <div class="course-action">
+                <button class="continue-btn">Continue</button>
+              </div>
+            </div>
+
+            <!-- Course Card 3 -->
+            <div class="course-card">
+              <div class="course-progress">
+                <div class="progress-bar">
+                  <div class="progress" style="width: 15%"></div>
+                </div>
+                <span class="progress-text">15% Complete</span>
+              </div>
+              <div class="course-info">
+                <h3>UI/UX Design Masterclass</h3>
+                <p>Learn design principles and prototyping</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-play-circle"></i> 3/20 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 4h 15m</span>
+                </div>
+              </div>
+              <div class="course-action">
+                <button class="continue-btn">Continue</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="dashboard-columns">
+          <section class="upcoming-section">
+            <div class="section-header">
+              <h2>Upcoming Sessions</h2>
+              <a href="#" class="view-all">View Calendar</a>
+            </div>
+            <div class="upcoming-list">
+              <div class="upcoming-card">
+                <div class="upcoming-date">
+                  <span class="day">15</span>
+                  <span class="month">APR</span>
+                </div>
+                <div class="upcoming-info">
+                  <h4>Advanced JavaScript Concepts</h4>
+                  <p>Web Development • 2:00 PM - 3:30 PM</p>
+                </div>
+                <button class="join-btn">Join</button>
+              </div>
+              <div class="upcoming-card">
+                <div class="upcoming-date">
+                  <span class="day">18</span>
+                  <span class="month">APR</span>
+                </div>
+                <div class="upcoming-info">
+                  <h4>Smart Contract Security</h4>
+                  <p>Blockchain • 10:00 AM - 11:30 AM</p>
+                </div>
+                <button class="join-btn">Join</button>
+              </div>
+              <div class="upcoming-card">
+                <div class="upcoming-date">
+                  <span class="day">22</span>
+                  <span class="month">APR</span>
+                </div>
+                <div class="upcoming-info">
+                  <h4>Responsive Design Workshop</h4>
+                  <p>UI/UX Design • 3:00 PM - 4:30 PM</p>
+                </div>
+                <button class="join-btn">Join</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="achievements-section">
+            <div class="section-header">
+              <h2>Your Achievements</h2>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="achievements-list">
+              <div class="achievement-card">
+                <div class="achievement-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <div class="achievement-info">
+                  <h4>Code Master</h4>
+                  <p>Completed 5 coding challenges</p>
+                </div>
+              </div>
+              <div class="achievement-card">
+                <div class="achievement-icon">
+                  <i class="fas fa-fire"></i>
+                </div>
+                <div class="achievement-info">
+                  <h4>7-Day Streak</h4>
+                  <p>Logged in for 7 consecutive days</p>
+                </div>
+              </div>
+              <div class="achievement-card">
+                <div class="achievement-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="achievement-info">
+                  <h4>First Certificate</h4>
+                  <p>Completed your first course</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="recommended-section">
+          <div class="section-header">
+            <h2>Recommended For You</h2>
+            <a href="#" class="view-all">Explore More</a>
+          </div>
+          <div class="recommended-grid">
+            <div class="recommended-card">
+              <div class="course-thumbnail">
+                <img src="/api/placeholder/350/180" alt="Course Thumbnail" />
+                <span class="course-category">Digital Marketing</span>
+              </div>
+              <div class="course-details">
+                <h3>Digital Marketing Fundamentals</h3>
+                <div class="course-stats">
+                  <span><i class="fas fa-play-circle"></i> 28 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 18 Hours</span>
+                  <span><i class="fas fa-star"></i> 4.9</span>
+                </div>
+                <p class="course-description">
+                  Learn SEO, social media marketing, email campaigns and more.
+                </p>
+                <button class="enroll-btn">Enroll Now</button>
+              </div>
+            </div>
+            <div class="recommended-card">
+              <div class="course-thumbnail">
+                <img src="/api/placeholder/350/180" alt="Course Thumbnail" />
+                <span class="course-category">Blockchain</span>
+              </div>
+              <div class="course-details">
+                <h3>NFT Development & Design</h3>
+                <div class="course-stats">
+                  <span><i class="fas fa-play-circle"></i> 32 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 24 Hours</span>
+                  <span><i class="fas fa-star"></i> 4.8</span>
+                </div>
+                <p class="course-description">
+                  Learn to create, deploy, and market your own NFT collections.
+                </p>
+                <button class="enroll-btn">Enroll Now</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

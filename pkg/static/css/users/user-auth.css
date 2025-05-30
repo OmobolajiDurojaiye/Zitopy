@@ -1,0 +1,619 @@
+/* Root Styles */
+:root {
+  --primary-blue: #0047a5;
+  --primary-yellow: #ffff05;
+  --text-color: #ffffff;
+  --dark-bg: #121212;
+  --light-bg: #f9f9f9;
+  --light-text: #333333;
+  --dark-card: #1e1e1e;
+  --light-card: #ffffff;
+  --blue-gradient: linear-gradient(135deg, #0047a5 0%, #0066cc 100%);
+  --yellow-gradient: linear-gradient(135deg, #ffff05 0%, #ebeb2e 100%);
+  --card-shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --card-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --input-bg-light: #f0f0f0;
+  --input-bg-dark: #2a2a2a;
+  --error-color: #ff4757;
+  --success-color: #2ed573;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+  transition: var(--transition);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  position: relative;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  cursor: pointer;
+  background: var(--blue-gradient);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.theme-toggle i {
+  color: var(--primary-yellow);
+  font-size: 18px;
+  transition: var(--transition);
+}
+
+.dark-mode .theme-toggle {
+  background: var(--yellow-gradient);
+}
+
+.dark-mode .theme-toggle i {
+  color: var(--primary-blue);
+}
+
+.dark-mode .theme-toggle i::before {
+  content: "\f185"; /* Sun icon */
+}
+
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background: transparent;
+  border: none;
+  color: var(--light-text);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 30px;
+  transition: var(--transition);
+  font-family: "Poppins", sans-serif;
+}
+
+.back-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .back-button {
+  color: var(--text-color);
+}
+
+.dark-mode .back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Authentication Container */
+.auth-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 80px auto 0;
+  padding: 30px;
+  background-color: var(--light-card);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow-light);
+  overflow: hidden;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.dark-mode .auth-container {
+  background-color: var(--dark-card);
+  box-shadow: var(--card-shadow-dark);
+}
+
+/* Background Shapes */
+.background-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: var(--transition);
+}
+
+.shape-1 {
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  right: -70px;
+  background: var(--blue-gradient);
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  left: -50px;
+  background: var(--yellow-gradient);
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 5%;
+  background: var(--blue-gradient);
+}
+
+.shape-4 {
+  width: 100px;
+  height: 100px;
+  bottom: 10%;
+  right: -30px;
+  background: var(--yellow-gradient);
+}
+
+.dark-mode .shape {
+  opacity: 0.2;
+}
+
+/* Brand */
+.brand {
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.brand h1 {
+  font-size: 24px;
+  font-weight: 700;
+  background: var(--blue-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.dark-mode .brand h1 {
+  background: var(--yellow-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--light-text);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  font-family: "Poppins", sans-serif;
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--blue-gradient);
+  transition: var(--transition);
+}
+
+.tab.active {
+  color: var(--primary-blue);
+}
+
+.tab.active::after {
+  width: 80%;
+}
+
+.dark-mode .tab {
+  color: var(--text-color);
+}
+
+.dark-mode .tab.active {
+  color: var(--primary-yellow);
+}
+
+.dark-mode .tab::after {
+  background: var(--yellow-gradient);
+}
+
+/* Forms Container */
+.forms-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-form {
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(50px);
+}
+
+.auth-form.active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  transform: translateX(0);
+}
+
+.auth-form h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--light-text);
+}
+
+.dark-mode .auth-form h2 {
+  color: var(--text-color);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.dark-mode .subtitle {
+  color: #aaa;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--light-text);
+}
+
+.dark-mode .form-group label {
+  color: var(--text-color);
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group i {
+  position: absolute;
+  left: 15px;
+  color: #999;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: var(--input-bg-light);
+  color: var(--light-text);
+  transition: var(--transition);
+  font-family: "Poppins", sans-serif;
+}
+
+.input-group select {
+  height: 45px;
+}
+
+.input-group select[multiple] {
+  height: auto;
+  min-height: 100px;
+  padding-left: 45px;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 71, 165, 0.2);
+}
+
+.dark-mode .input-group input,
+.dark-mode .input-group select {
+  background-color: var(--input-bg-dark);
+  border-color: #333;
+  color: var(--text-color);
+}
+
+.dark-mode .input-group input:focus,
+.dark-mode .input-group select:focus {
+  border-color: var(--primary-yellow);
+  box-shadow: 0 0 0 3px rgba(255, 255, 5, 0.2);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  color: #999;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-group input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-blue);
+}
+
+.dark-mode .checkbox-group input {
+  accent-color: var(--primary-yellow);
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.checkbox-group a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.dark-mode .checkbox-group a {
+  color: var(--primary-yellow);
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: -10px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.dark-mode .forgot-password a {
+  color: var(--primary-yellow);
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--blue-gradient);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 10px 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 71, 165, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(0, 71, 165, 0.2);
+}
+
+.dark-mode .btn-primary {
+  background: var(--yellow-gradient);
+  color: var(--dark-bg);
+}
+
+.dark-mode .btn-primary:hover {
+  box-shadow: 0 10px 20px rgba(255, 255, 5, 0.2);
+}
+
+/* Social Signup */
+.social-signup {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.social-signup p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.social-signup p::before,
+.social-signup p::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: #e1e1e1;
+}
+
+.social-signup p::before {
+  left: 0;
+}
+
+.social-signup p::after {
+  right: 0;
+}
+
+.dark-mode .social-signup p {
+  color: #aaa;
+}
+
+.dark-mode .social-signup p::before,
+.dark-mode .social-signup p::after {
+  background-color: #333;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-social {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #e1e1e1;
+  background-color: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-social i {
+  font-size: 18px;
+  color: #555;
+}
+
+.btn-social:hover {
+  transform: translateY(-3px);
+}
+
+.btn-social.google:hover {
+  background-color: #db4437;
+  border-color: #db4437;
+}
+
+.btn-social.github:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.btn-social.linkedin:hover {
+  background-color: #0077b5;
+  border-color: #0077b5;
+}
+
+.btn-social:hover i {
+  color: #fff;
+}
+
+.dark-mode .btn-social {
+  border-color: #333;
+}
+
+.dark-mode .btn-social i {
+  color: #aaa;
+}
+
+/* Small text */
+small {
+  font-size: 12px;
+  color: #777;
+}
+
+.dark-mode small {
+  color: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .auth-container {
+    padding: 20px;
+    margin-top: 60px;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+  }
+
+  .tab {
+    font-size: 14px;
+  }
+
+  .auth-form h2 {
+    font-size: 20px;
+  }
+
+  .input-group input,
+  .input-group select {
+    padding: 10px 15px 10px 40px;
+  }
+
+  .btn-primary {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zitopy - Authentication</title>
+    <link rel="stylesheet" href="user-auth.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="theme-toggle">
+        <i class="fas fa-moon" id="dark-mode-toggle"></i>
+      </div>
+
+      <button class="back-button" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+
+      <div class="auth-container">
+        <div class="background-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+          <div class="shape shape-4"></div>
+        </div>
+
+        <div class="brand">
+          <div class="logo">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 0L37.3205 10V30L20 40L2.67949 30V10L20 0Z"
+                fill="url(#paint0_linear)"
+              />
+              <path
+                d="M20 5L32.6795 12.5V27.5L20 35L7.32051 27.5V12.5L20 5Z"
+                fill="url(#paint1_linear)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="2.67949"
+                  y1="20"
+                  x2="37.3205"
+                  y2="20"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#0047A5" />
+                  <stop offset="1" stop-color="#0066CC" />
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear"
+                  x1="7.32051"
+                  y1="20"
+                  x2="32.6795"
+                  y2="20"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFFF05" />
+                  <stop offset="1" stop-color="#EBEB2E" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1>Zitopy Courses</h1>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="signup">Sign Up</button>
+          <button class="tab" data-tab="login">Login</button>
+        </div>
+
+        <div class="forms-container">
+          <!-- Signup Form -->
+          <form id="signup-form" class="auth-form active">
+            <h2>Create Your Account</h2>
+            <p class="subtitle">Start your learning journey with Zitopy</p>
+
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  id="fullname"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <div class="input-group">
+                <i class="fas fa-calendar"></i>
+                <input type="date" id="dob" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Create a strong password"
+                  required
+                />
+                <i class="fas fa-eye-slash toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Confirm your password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="interests">Areas of Interest</label>
+              <div class="input-group">
+                <i class="fas fa-graduation-cap"></i>
+                <select id="interests" multiple>
+                  <option value="web-dev">Web Development</option>
+                  <option value="blockchain">Blockchain & Web3</option>
+                  <option value="digital-marketing">Digital Marketing</option>
+                  <option value="ui-ux">UI/UX Design</option>
+                  <option value="data-science">Data Science</option>
+                </select>
+              </div>
+              <small>Hold Ctrl/Cmd to select multiple</small>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="terms" required />
+              <label for="terms"
+                >I agree to the <a href="#">Terms of Service</a> and
+                <a href="#">Privacy Policy</a></label
+              >
+            </div>
+
+            <button type="submit" class="btn-primary">Create Account</button>
+
+            <!-- <div class="social-signup">
+              <p>Or sign up with</p>
+              <div class="social-buttons">
+                <button type="button" class="btn-social google">
+                  <i class="fab fa-google"></i>
+                </button>
+                <button type="button" class="btn-social github">
+                  <i class="fab fa-github"></i>
+                </button>
+                <button type="button" class="btn-social linkedin">
+                  <i class="fab fa-linkedin-in"></i>
+                </button>
+              </div>
+            </div> -->
+          </form>
+
+          <!-- Login Form -->
+          <form id="login-form" class="auth-form">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Continue your learning journey</p>
+
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Enter your password"
+                  required
+                />
+                <i class="fas fa-eye-slash toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="form-group forgot-password">
+              <a href="#">Forgot your password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+
+            <!-- <div class="social-signup">
+              <p>Or login with</p>
+              <div class="social-buttons">
+                <button type="button" class="btn-social google">
+                  <i class="fab fa-google"></i>
+                </button>
+                <button type="button" class="btn-social github">
+                  <i class="fab fa-github"></i>
+                </button>
+                <button type="button" class="btn-social linkedin">
+                  <i class="fab fa-linkedin-in"></i>
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="user-auth.js"></script>
+  </body>
+</html>
