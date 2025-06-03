@@ -1,0 +1,325 @@
+:root {
+  --primary-blue: #0047a5;
+  --primary-yellow: #ffff05; /* Will use this sparingly, more as an accent if needed */
+  --light-text: #333333;
+  --muted-text: #6c757d; /* Softer muted text */
+  --border-light: #dee2e6; /* Softer border */
+  --light-bg: #f8f9fa; /* Slightly off-white for subtle depth */
+  --blue-gradient: linear-gradient(135deg, #0047a5 0%, #0066cc 100%);
+  --card-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease-in-out; /* Consistent transition */
+  --input-focus-glow: rgba(0, 71, 165, 0.2); /* Softer focus glow */
+}
+
+.auth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.8); /* Darker, more immersive overlay */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother bezier curve */
+  padding: 20px;
+}
+
+.auth-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.auth-modal-content {
+  background-color: #fff;
+  padding: 35px 40px; /* Increased padding for a more spacious feel */
+  border-radius: 16px; /* Larger, softer border radius */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1); /* More sophisticated shadow */
+  position: relative;
+  width: 100%;
+  max-width: 460px; /* Optimized width */
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9) translateY(30px); /* More pronounced entry animation */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+.auth-modal-overlay.active .auth-modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 18px; /* Adjusted for better visual balance */
+  right: 18px;
+  width: 36px; /* Larger click target */
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Icon size */
+  font-weight: normal; /* Less visually heavy */
+  color: #999; /* Softer close icon color */
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.auth-modal-close:hover {
+  color: var(--light-text);
+  background-color: var(--light-bg); /* Subtle hover background */
+}
+
+.auth-modal-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px; /* More space below header */
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 15px; /* Space between text and border */
+}
+
+.tab-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-size: 17px; /* Slightly larger, more prominent */
+  font-weight: 500;
+  color: var(--muted-text);
+  transition: color 0.25s ease, border-bottom-color 0.25s ease;
+  border-bottom: 2px solid transparent; /* Thinner, more subtle inactive border */
+  position: relative; /* For potential pseudo-elements if needed */
+  margin: 0 5px; /* Spacing between tabs */
+}
+
+.tab-button.active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+  font-weight: 600; /* Clearer active state */
+}
+
+.tab-button:not(.active):hover {
+  color: var(--primary-blue); /* Hover effect for inactive tabs */
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeInContent 0.4s ease-in-out; /* Subtle fade-in for content */
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  background-color: var(--light-bg); /* Pill background */
+  border-radius: 25px; /* Pill shape */
+  padding: 6px;
+  border: 1px solid var(--border-light); /* Subtle border for definition */
+}
+
+.form-toggle-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 0; /* Vertical padding, horizontal handled by flex-grow */
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500; /* Consistent weight */
+  color: var(--muted-text);
+  border-radius: 20px; /* Rounded buttons within pill */
+  transition: background-color 0.25s ease, color 0.25s ease;
+  flex: 1; /* Equal width */
+  text-align: center;
+  margin: 0 3px; /* Small gap between toggle buttons */
+}
+
+.form-toggle-button.active {
+  background-color: var(--primary-blue);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 71, 165, 0.2); /* Subtle shadow for active toggle */
+}
+
+.form-toggle-button:not(.active):hover {
+  background-color: #e9ecef; /* Hover for inactive toggle */
+}
+
+.auth-form {
+  display: none;
+  flex-direction: column;
+  gap: 20px; /* Increased gap for better spacing */
+}
+
+.auth-form.active {
+  display: flex;
+}
+
+.auth-form h3 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--light-text);
+  margin-bottom: 15px; /* More space below heading */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* For potential future icon additions */
+}
+
+.form-group label {
+  font-size: 14px; /* Standard label size */
+  color: var(--light-text); /* Darker label for better contrast */
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  padding: 14px 18px; /* Generous padding for comfortable typing */
+  border: 1px solid var(--border-light);
+  border-radius: 10px; /* Softer, modern radius */
+  font-size: 16px; /* Larger input text */
+  color: var(--light-text);
+  background-color: #fff; /* Ensure white background */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  width: 100%; /* Ensure full width */
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group input[type="password"]::placeholder {
+  color: #adb5bd; /* Softer placeholder text */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px var(--input-focus-glow); /* Refined focus glow */
+}
+
+.auth-submit-button {
+  padding: 15px 20px; /* Larger submit button */
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 15px; /* More space above button */
+  background: var(--blue-gradient);
+  color: white;
+  border: none;
+  border-radius: 10px; /* Consistent with inputs */
+  cursor: pointer;
+  transition: var(--transition), transform 0.2s ease, box-shadow 0.2s ease; /* Add transform and shadow */
+}
+
+.auth-submit-button:hover {
+  transform: translateY(-3px); /* Subtle lift on hover */
+  box-shadow: 0 6px 18px rgba(0, 71, 165, 0.25); /* Enhanced shadow on hover */
+}
+
+.auth-submit-button:active {
+  transform: translateY(-1px); /* Press down effect */
+  box-shadow: 0 3px 10px rgba(0, 71, 165, 0.2);
+}
+
+/* Flash messages styling (using styles from home.css or global, ensuring consistency) */
+/* If flash messages are styled globally, these might not be strictly necessary here,
+     but including them ensures they look good if auth.css is standalone for the modal context. */
+.flash-messages-container {
+  /* Assuming this class is used on home.html */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4000;
+  width: 90%;
+  max-width: 500px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flash-message {
+  /* Assuming this class is used on home.html */
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  opacity: 0;
+  animation: flashMessageIn 0.5s forwards;
+}
+
+@keyframes flashMessageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.flash-messages-container .flash-success {
+  /* Specific styling for success/error */
+  background-color: #e6f7ed;
+  color: #006427;
+  border: 1px solid #b7ebc5;
+}
+.flash-messages-container .flash-error {
+  background-color: #fff0f0;
+  color: #c8102e;
+  border: 1px solid #ffd6d6;
+}
+
+/* Responsive adjustments for the modal */
+@media (max-width: 520px) {
+  .auth-modal-content {
+    padding: 25px 20px; /* Adjust padding for smaller screens */
+    max-width: calc(100% - 30px); /* Ensure some margin */
+    border-radius: 12px; /* Slightly smaller radius for small screens */
+  }
+  .tab-button {
+    font-size: 15px; /* Slightly smaller tab font */
+    padding: 10px 12px;
+  }
+  .form-toggle-button {
+    font-size: 14px;
+    padding: 9px 0;
+  }
+  .auth-form h3 {
+    font-size: 20px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    padding: 12px 15px;
+    font-size: 15px;
+  }
+  .auth-submit-button {
+    padding: 13px 18px;
+    font-size: 15px;
+  }
+}

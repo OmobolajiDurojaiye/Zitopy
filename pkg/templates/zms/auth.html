@@ -1,0 +1,210 @@
+<div id="authModal" class="auth-modal-overlay">
+  <div class="auth-modal-content">
+    <span class="auth-modal-close" id="closeAuthModal">×</span>
+
+    <div class="auth-modal-header">
+      <button class="tab-button active" data-tab="businessOwnerTab">
+        Business Owner
+      </button>
+      <button class="tab-button" data-tab="clientTab">Client</button>
+    </div>
+
+    <!-- Business Owner Tab Content -->
+    <div id="businessOwnerTab" class="tab-content active">
+      <div class="form-toggle">
+        <button class="form-toggle-button active" data-form="boLogin">
+          Login
+        </button>
+        <button class="form-toggle-button" data-form="boSignup">Sign Up</button>
+      </div>
+
+      <!-- Business Owner Login Form -->
+      <form
+        id="boLoginForm"
+        class="auth-form active"
+        method="POST"
+        action="{{ url_for('zms.business_login') }}"
+      >
+        <h3>Business Owner Login</h3>
+        <div class="form-group">
+          <label for="boLoginEmail">Email</label>
+          <input
+            type="email"
+            id="boLoginEmail"
+            name="email"
+            required
+            aria-label="Business Owner Email for Login"
+          />
+        </div>
+        <div class="form-group">
+          <label for="boLoginPassword">Password</label>
+          <input
+            type="password"
+            id="boLoginPassword"
+            name="password"
+            required
+            aria-label="Business Owner Password for Login"
+          />
+        </div>
+        <button type="submit" class="btn-primary auth-submit-button">
+          Login
+        </button>
+      </form>
+
+      <!-- Business Owner Signup Form -->
+      <form
+        id="boSignupForm"
+        class="auth-form"
+        method="POST"
+        action="{{ url_for('zms.business_signup') }}"
+      >
+        <h3>Business Owner Sign Up</h3>
+        <div class="form-group">
+          <label for="boSignupBusinessName">Business Name</label>
+          <input
+            type="text"
+            id="boSignupBusinessName"
+            name="business_name"
+            required
+            aria-label="Business Name for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="boSignupEmail">Email</label>
+          <input
+            type="email"
+            id="boSignupEmail"
+            name="email"
+            required
+            aria-label="Business Owner Email for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="boSignupPassword">Password</label>
+          <input
+            type="password"
+            id="boSignupPassword"
+            name="password"
+            required
+            minlength="8"
+            aria-label="Business Owner Password for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="boSignupConfirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="boSignupConfirmPassword"
+            name="confirm_password"
+            required
+            minlength="8"
+            aria-label="Confirm Password for Business Owner Signup"
+          />
+        </div>
+        <button type="submit" class="btn-primary auth-submit-button">
+          Sign Up
+        </button>
+      </form>
+    </div>
+
+    <!-- Client Tab Content -->
+    <div id="clientTab" class="tab-content">
+      <div class="form-toggle">
+        <button class="form-toggle-button active" data-form="clientLogin">
+          Login
+        </button>
+        <button class="form-toggle-button" data-form="clientSignup">
+          Sign Up
+        </button>
+      </div>
+
+      <!-- Client Login Form -->
+      <form
+        id="clientLoginForm"
+        class="auth-form active"
+        method="POST"
+        action="{{ url_for('zms.client_login') }}"
+      >
+        <h3>Client Login</h3>
+        <div class="form-group">
+          <label for="clientLoginEmail">Email</label>
+          <input
+            type="email"
+            id="clientLoginEmail"
+            name="email"
+            required
+            aria-label="Client Email for Login"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clientLoginPassword">Password</label>
+          <input
+            type="password"
+            id="clientLoginPassword"
+            name="password"
+            required
+            aria-label="Client Password for Login"
+          />
+        </div>
+        <button type="submit" class="btn-primary auth-submit-button">
+          Login
+        </button>
+      </form>
+
+      <!-- Client Signup Form -->
+      <form
+        id="clientSignupForm"
+        class="auth-form"
+        method="POST"
+        action="{{ url_for('zms.client_signup') }}"
+      >
+        <h3>Client Sign Up</h3>
+        <div class="form-group">
+          <label for="clientSignupFullName">Full Name</label>
+          <input
+            type="text"
+            id="clientSignupFullName"
+            name="full_name"
+            required
+            aria-label="Client Full Name for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clientSignupEmail">Email</label>
+          <input
+            type="email"
+            id="clientSignupEmail"
+            name="email"
+            required
+            aria-label="Client Email for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clientSignupPassword">Password</label>
+          <input
+            type="password"
+            id="clientSignupPassword"
+            name="password"
+            required
+            minlength="8"
+            aria-label="Client Password for Signup"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clientSignupConfirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="clientSignupConfirmPassword"
+            name="confirm_password"
+            required
+            minlength="8"
+            aria-label="Confirm Password for Client Signup"
+          />
+        </div>
+        <button type="submit" class="btn-primary auth-submit-button">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
