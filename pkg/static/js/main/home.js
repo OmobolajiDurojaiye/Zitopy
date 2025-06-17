@@ -75,54 +75,64 @@ class ModernLandingPage {
     });
   }
 
-  // Mobile Navigation (UPDATED)
+  // Mobile Navigation (CORRECTED)
   setupMobileNavigation() {
-    const menuOpen = document.getElementById("menuOpen");
-    const menuClose = document.getElementById("menuClose");
-    const navLinks = document.getElementById("navLinks");
+    const menuToggleBtn = document.getElementById("menuOpen");
+    const menuCloseBtn = document.getElementById("menuClose");
+    const navMenu = document.getElementById("navLinks");
 
-    if (!menuOpen || !menuClose || !navLinks) {
-      console.error("Mobile navigation elements not found!");
+    if (!menuToggleBtn || !menuCloseBtn || !navMenu) {
+      console.error(
+        "Mobile navigation elements not found: #menuOpen, #menuClose, or #navLinks"
+      );
       return;
     }
-    const navLinksItems = navLinks.querySelectorAll("a");
+
+    const navLinks = navMenu.querySelectorAll("a");
 
     const openMenu = () => {
-      navLinks.classList.add("active");
+      navMenu.classList.add("active");
       document.body.classList.add("mobile-nav-active");
     };
 
     const closeMenu = () => {
-      navLinks.classList.remove("active");
+      navMenu.classList.remove("active");
       document.body.classList.remove("mobile-nav-active");
     };
 
-    menuOpen.addEventListener("click", openMenu);
-    menuClose.addEventListener("click", closeMenu);
+    const toggleMenu = () => {
+      if (navMenu.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
 
-    // Close menu when clicking on a link
-    navLinksItems.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navLinks.classList.contains("active")) {
-          closeMenu();
-        }
-      });
+    // Hamburger button toggles the menu
+    menuToggleBtn.addEventListener("click", toggleMenu);
+
+    // Close button inside the menu closes it
+    menuCloseBtn.addEventListener("click", closeMenu);
+
+    // Clicking on a nav link closes the menu
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
     });
 
-    // Close menu when clicking outside (on the overlay)
+    // Clicking outside the menu (on the overlay) closes it
     document.addEventListener("click", (e) => {
       if (
-        navLinks.classList.contains("active") &&
-        !navLinks.contains(e.target) &&
-        !menuOpen.contains(e.target)
+        navMenu.classList.contains("active") &&
+        !navMenu.contains(e.target) &&
+        !menuToggleBtn.contains(e.target)
       ) {
         closeMenu();
       }
     });
 
-    // Also handle Escape key to close
+    // Pressing the Escape key closes the menu
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && navLinks.classList.contains("active")) {
+      if (e.key === "Escape" && navMenu.classList.contains("active")) {
         closeMenu();
       }
     });
@@ -476,13 +486,14 @@ class ModernLandingPage {
     });
   }
 
-  // Back to Top Button
+  // Back to Top Button (UPDATED)
   setupBackToTop() {
     const backToTop = document.createElement("div");
-    backToTop.className = "back-to-top"; // Class from CSS
+    backToTop.className = "back-to-top"; // Add class name for styling
     backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
     document.body.appendChild(backToTop);
 
+    // Show/hide button based on scroll position
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 300) {
         backToTop.classList.add("visible");
@@ -491,6 +502,7 @@ class ModernLandingPage {
       }
     });
 
+    // Scroll to top on click
     backToTop.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
