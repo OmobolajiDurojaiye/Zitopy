@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Zitopy Tech</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main/home.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/flash/flash.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Flash Messages Container -->
+    <div class="flash-messages">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="server-flash-message" data-type="{{ category }}">
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
+
+    <!-- Header -->
+    <header class="header" style="transform: translateY(0px)">
+      <div class="container">
+        <nav class="navbar">
+          <a href="{{ url_for('main.landing') }}" class="logo">
+            <img
+              src="{{ url_for('static', filename='images/logo.jpg') }}"
+              alt="Zitopy Logo"
+            />
+            <span class="logo-text">Zitopy</span>
+          </a>
+          <div class="nav-actions">
+            <a
+              href="{{ url_for('main.landing') }}#courses"
+              class="btn btn-outline"
+            >
+              <i class="fas fa-arrow-left"></i> Back to Courses
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">
+            Complete Your <span class="text-gradient-blue">Order</span>
+          </h2>
+          <p class="section-subtitle">
+            Review your selected courses and provide your details to proceed.
+          </p>
+        </div>
+
+        <div class="checkout-wrapper">
+          <!-- Order Summary -->
+          <div class="order-summary" data-aos="fade-right">
+            <h3>Order Summary</h3>
+            <div id="summary-items-container">
+              <!-- Items will be injected by JS -->
+              <p class="empty-cart-message">
+                Your cart is empty.
+                <a href="{{ url_for('main.landing') }}#courses">Add courses</a>
+                to continue.
+              </p>
+            </div>
+            <div class="summary-total">
+              <span>Total (Per Month)</span>
+              <span id="summary-total-price">₦0</span>
+            </div>
+          </div>
+
+          <!-- Checkout Form -->
+          <div class="checkout-form-container" data-aos="fade-left">
+            <h3>Your Details</h3>
+            <form
+              id="checkout-form"
+              action="{{ url_for('main.create_order') }}"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}"
+              />
+              <input type="hidden" name="cart_items" id="cart-items-input" />
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your Full Name"
+                  required
+                />
+                <label for="name">Your Full Name</label>
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Your Email Address"
+                  required
+                />
+                <label for="email">Your Email Address</label>
+              </div>
+
+              <div class="payment-info">
+                <h4>Next Steps</h4>
+                <p>
+                  After placing your order, our team will contact you via email
+                  with payment instructions to finalize your enrollment. We will
+                  be using Paystack for secure payments.
+                </p>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-large"
+                id="place-order-btn"
+                disabled
+              >
+                <i class="fas fa-check-circle"></i>
+                Place Order
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/flash/flash.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main/checkout.js') }}"></script>
+  </body>
+</html>

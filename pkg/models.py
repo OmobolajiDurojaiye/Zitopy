@@ -29,54 +29,47 @@ class Contact(db.Model):
             'is_read': self.is_read
         }
 
-class BusinessOwner(db.Model):
-    __tablename__ = 'business_owners'
+# --- NEW E-COMMERCE MODELS ---
 
+class Course(db.Model):
+    __tablename__ = 'courses'
+    
     id = db.Column(db.Integer, primary_key=True)
-    business_name = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False) 
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f'<BusinessOwner {self.business_name} ({self.email})>'
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
+    slug = db.Column(db.String(80), unique=True, nullable=False) # e.g., 'full-stack-dev'
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    price_per_month = db.Column(db.Integer, nullable=False) # Store price in the smallest currency unit (e.g., kobo), but integer for now.
+    duration = db.Column(db.String(50), nullable=False) # e.g., "8-12 Months"
+    features = db.Column(db.JSON, nullable=True) # To store features like ["Live Classes", "2 Classes/Week"]
+    
     def to_dict(self):
         return {
             'id': self.id,
-            'business_name': self.business_name,
-            'email': self.email,
-            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            'slug': self.slug,
+            'title': self.title,
+            'description': self.description,
+            'price_per_month': self.price_per_month,
+            'duration': self.duration,
+            'features': self.features
         }
 
-class Client(db.Model):
-    __tablename__ = 'clients'
-
+class Order(db.Model):
+    __tablename__ = 'orders'
+    
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False) 
+    customer_name = db.Column(db.String(100), nullable=False)
+    customer_email = db.Column(db.String(120), nullable=False)
+    total_amount = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(20), nullable=False, default='pending') # pending, paid, cancelled
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    items = db.relationship('OrderItem', backref='order', lazy=True, cascade="all, delete-orphan")
 
-    def __repr__(self):
-        return f'<Client {self.full_name} ({self.email})>'
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'full_name': self.full_name,
-            'email': self.email,
-            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
-        }
+class OrderItem(db.Model):
+    __tablename__ = 'order_items'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
+    course_title = db.Column(db.String(100), nullable=False) # Denormalized for easy display
+    price_at_purchase = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=1) # For now, quantity will be 1 month

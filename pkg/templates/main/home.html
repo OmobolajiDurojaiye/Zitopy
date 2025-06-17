@@ -65,6 +65,14 @@
           </div>
 
           <div class="nav-actions">
+            <a
+              href="{{ url_for('main.checkout') }}"
+              class="btn-cart"
+              aria-label="View your shopping cart"
+            >
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-badge">0</span>
+            </a>
             <a href="#courses" class="btn btn-primary">START LEARNING</a>
             <i class="fas fa-bars nav-toggle" id="menuOpen"></i>
           </div>
@@ -92,8 +100,7 @@
             <p class="hero-description">
               Master in-demand technologies, build professional projects, and
               launch your career with our comprehensive courses in web
-              development and more. {#, digital marketing, and blockchain
-              technology.#}
+              development, crypto, and more.
             </p>
             <div class="hero-cta">
               <a href="#courses" class="btn btn-primary btn-large">
@@ -114,12 +121,6 @@
                 <span class="stat-number">90%</span>
                 <span class="stat-label">Success Rate</span>
               </div>
-              {#
-              <div class="stat">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Projects</span>
-              </div>
-              #}
             </div>
           </div>
 
@@ -153,7 +154,8 @@
             Our <span class="text-gradient-blue">Premium</span> Services
           </h2>
           <p class="section-subtitle">
-            Comprehensive tech education and professional solutions
+            Comprehensive education and professional solutions for the modern
+            era.
           </p>
         </div>
 
@@ -162,13 +164,13 @@
             <div class="service-icon tech-teaching">
               <i class="fas fa-laptop-code"></i>
             </div>
-            <h3>Tech Teaching</h3>
+            <h3>Coding Teaching</h3>
             <p>
-              Master cutting-edge technologies with our expert-led courses and
-              hands-on projects.
+              From front-end to full-stack, master cutting-edge technologies
+              with our expert-led courses.
             </p>
             <a href="#courses" class="service-link">
-              Learn More <i class="fas fa-arrow-right"></i>
+              Explore Courses <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
@@ -178,26 +180,25 @@
             </div>
             <h3>Tech Solutions</h3>
             <p>
-              Custom websites, applications, and digital solutions tailored for
-              your business needs.
+              Custom websites, e-commerce stores, and business software tailored
+              to your needs.
             </p>
             <a href="#solutions" class="service-link">
-              Learn More <i class="fas fa-arrow-right"></i>
+              View Solutions <i class="fas fa-arrow-right"></i>
             </a>
           </div>
 
           <div class="service-card" data-aos="fade-up" data-aos-delay="200">
             <div class="service-icon web3">
-              <i class="fas fa-cubes"></i>
+              <i class="fab fa-bitcoin"></i>
             </div>
-            <h3>Web3 Development</h3>
-            <!-- crypto teaching -->
+            <h3>Crypto Teaching</h3>
             <p>
-              Blockchain solutions, smart contracts, and decentralized
-              applications for the future.
+              Dive into the world of blockchain, smart contracts, and Web3 with
+              our specialized crypto courses.
             </p>
-            <a href="#web3" class="service-link">
-              Learn More <i class="fas fa-arrow-right"></i>
+            <a href="#courses" class="service-link">
+              Learn Crypto <i class="fas fa-arrow-right"></i>
             </a>
           </div>
         </div>
@@ -209,195 +210,246 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">
-            Featured <span class="text-gradient-yellow">Courses</span>
+            Our <span class="text-gradient-yellow">Flagship</span> Courses
           </h2>
           <p class="section-subtitle">
-            Start your tech journey with our most popular courses
+            All our <span style="color: #ffff05">online live classes</span> come
+            with world-class mentorship and support.
           </p>
         </div>
 
-        <div class="courses-grid">
-          <!-- Full-Stack Web Development Course -->
-          <div class="course-card premium" data-aos="fade-up">
-            <div class="course-badge">Most Popular</div>
-            <div class="course-image">
-              <div class="course-icon">
-                <i class="fas fa-code"></i>
+        <div class="courses-grid-new">
+          <!-- Full-Stack Web Development -->
+          <div class="course-card-v2" data-aos="fade-up">
+            <div class="course-header">
+              <div class="course-icon-v2">
+                <i class="fas fa-layer-group"></i>
               </div>
-              <div class="course-overlay">
-                <span class="course-category">Full-Stack Development</span>
-              </div>
-            </div>
-
-            <div class="course-content">
-              <h3 class="course-title">Full-Stack Web Development</h3>
-              <div class="course-tracks">
-                <div class="track">
-                  <i class="fas fa-palette"></i>
-                  <span>Front-end Development</span>
-                </div>
-                <div class="track">
-                  <i class="fas fa-server"></i>
-                  <span>Backend Development</span>
-                </div>
-              </div>
-
-              <p class="course-description">
-                Master both front-end and back-end development with HTML, CSS,
-                JavaScript, React, Node.js, and database management.
+              <h3 class="course-title-v2">Full-Stack Development</h3>
+              <p class="course-description-v2">
+                Become a versatile developer by mastering both front-end and
+                back-end technologies.
               </p>
-
-              <div class="course-features">
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>12 Weeks Intensive Training</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>5 Real-world Projects</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Job Placement Support</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>4 classes in a month</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>2hrs per classes</span>
-                </div>
-              </div>
-
-              <div class="course-pricing">
-                <div class="price-tag">
-                  <span class="currency">₦</span>
-                  <span class="amount">150,000</span>
-                  <span class="period">/ $100 per month</span>
-                  <!-- $100 @ rate of 1600 / month -->
-                  <!-- 4 classes in a month -->
-                  <!-- 2hrs per classes -->
-                </div>
-              </div>
-
+            </div>
+            <div class="course-details">
+              <h4>You'll get access to:</h4>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Personalized Learning
+                  Plans
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Hands-On Projects &
+                  Assignments
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Certificate of Completion
+                </li>
+              </ul>
+            </div>
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 8-12 Months</span>
+              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
+            </div>
+            <div class="course-pricing-v2">
+              <span class="price">₦160,000</span>
+              <span class="period">/ month</span>
+            </div>
+            <div class="course-actions">
+              <button
+                class="btn btn-primary btn-block add-to-cart-btn"
+                data-course-id="1"
+                data-course-name="Full-Stack Development"
+                data-course-price="160000"
+              >
+                <i class="fas fa-cart-plus"></i> Add to Cart
+              </button>
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
-                class="btn btn-primary btn-course"
+                class="btn btn-outline btn-block"
               >
-                <i class="fas fa-shopping-cart"></i>
-                Order Course
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
               </a>
             </div>
           </div>
 
-          <!-- Digital Marketing Course -->
-          <div class="course-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="course-image">
-              <div class="course-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <div class="course-overlay">
-                <span class="course-category">Digital Marketing</span>
-              </div>
-            </div>
-
-            <div class="course-content">
-              <h3 class="course-title">Digital Marketing Mastery</h3>
-
-              <p class="course-description">
-                Master SEO, social media marketing, content creation, and
-                analytics to drive business growth and engagement.
+          <!-- Front-end Development -->
+          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="100">
+            <div class="course-header">
+              <div class="course-icon-v2"><i class="fas fa-desktop"></i></div>
+              <h3 class="course-title-v2">Front-End Development</h3>
+              <p class="course-description-v2">
+                Build beautiful, responsive, and interactive user interfaces
+                with modern frameworks.
               </p>
-
-              <div class="course-features">
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>8 Weeks Comprehensive</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Google Ads Certification</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Portfolio Building</span>
-                </div>
-              </div>
-
-              <div class="course-pricing">
-                <div class="price-tag">
-                  <span class="currency">₦</span>
-                  <span class="amount">100,000</span>
-                  <span class="period">/ $130</span>
-                </div>
-              </div>
-
+            </div>
+            <div class="course-details">
+              <h4>You'll get access to:</h4>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Personalized Learning
+                  Plans
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Hands-On Projects &
+                  Assignments
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Certificate of Completion
+                </li>
+              </ul>
+            </div>
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 4-6 Months</span>
+              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
+            </div>
+            <div class="course-pricing-v2">
+              <span class="price">₦160,000</span>
+              <span class="period">/ month</span>
+            </div>
+            <div class="course-actions">
+              <button
+                class="btn btn-primary btn-block add-to-cart-btn"
+                data-course-id="2"
+                data-course-name="Front-End Development"
+                data-course-price="160000"
+              >
+                <i class="fas fa-cart-plus"></i> Add to Cart
+              </button>
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
-                class="btn btn-primary btn-course"
+                class="btn btn-outline btn-block"
               >
-                <i class="fas fa-shopping-cart"></i>
-                Order Course
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
               </a>
             </div>
           </div>
 
-          <!-- Blockchain Development Course -->
-          <div class="course-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-badge">Advanced</div>
-            <div class="course-image">
-              <div class="course-icon">
-                <i class="fas fa-link"></i>
-              </div>
-              <div class="course-overlay">
-                <span class="course-category">Blockchain</span>
-              </div>
-            </div>
-
-            <div class="course-content">
-              <h3 class="course-title">Blockchain Development</h3>
-
-              <p class="course-description">
-                Build decentralized applications, smart contracts, and
-                understand cryptocurrency integration and Web3 technologies.
+          <!-- Backend Development -->
+          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="200">
+            <div class="course-header">
+              <div class="course-icon-v2"><i class="fas fa-server"></i></div>
+              <h3 class="course-title-v2">Backend Development</h3>
+              <p class="course-description-v2">
+                Power applications with robust server-side logic, APIs, and
+                database management.
               </p>
-
-              <div class="course-features">
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>10 Weeks Advanced</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>Smart Contract Development</span>
-                </div>
-                <div class="feature">
-                  <i class="fas fa-check-circle"></i>
-                  <span>DApp Building</span>
-                </div>
-              </div>
-
-              <div class="course-pricing">
-                <div class="price-tag">
-                  <span class="currency">₦</span>
-                  <span class="amount">200,000</span>
-                  <span class="period">/ $270</span>
-                </div>
-              </div>
-
+            </div>
+            <div class="course-details">
+              <h4>You'll get access to:</h4>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Personalized Learning
+                  Plans
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Hands-On Projects &
+                  Assignments
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Certificate of Completion
+                </li>
+              </ul>
+            </div>
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> 4-6 Months</span>
+              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
+            </div>
+            <div class="course-pricing-v2">
+              <span class="price">₦180,000</span>
+              <span class="period">/ month</span>
+            </div>
+            <div class="course-actions">
+              <button
+                class="btn btn-primary btn-block add-to-cart-btn"
+                data-course-id="3"
+                data-course-name="Backend Development"
+                data-course-price="180000"
+              >
+                <i class="fas fa-cart-plus"></i> Add to Cart
+              </button>
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
-                class="btn btn-primary btn-course"
+                class="btn btn-outline btn-block"
               >
-                <i class="fas fa-shopping-cart"></i>
-                Order Course
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
               </a>
             </div>
           </div>
+
+          <!-- Crypto Teaching -->
+          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="300">
+            <div class="course-header">
+              <div class="course-icon-v2"><i class="fab fa-bitcoin"></i></div>
+              <h3 class="course-title-v2">Crypto & Web3</h3>
+              <p class="course-description-v2">
+                Explore blockchain technology, smart contracts, and the future
+                of the decentralized web.
+              </p>
+            </div>
+            <div class="course-details">
+              <h4>You'll get access to:</h4>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Personalized Learning
+                  Plans
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Hands-On Projects &
+                  Assignments
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Certificate of Completion
+                </li>
+              </ul>
+            </div>
+            <div class="course-meta">
+              <span><i class="fas fa-clock"></i> Custom Duration</span>
+              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
+            </div>
+            <div class="course-pricing-v2">
+              <span class="price">Contact Us</span>
+              <span class="period">for pricing</span>
+            </div>
+            <div class="course-actions">
+              <button
+                class="btn btn-primary btn-block add-to-cart-btn"
+                data-course-id="4"
+                data-course-name="Crypto & Web3"
+                data-course-price="180000"
+              >
+                <i class="fas fa-cart-plus"></i> Add to Cart
+              </button>
+              <a href="#contact" class="btn btn-outline btn-block">
+                <i class="fas fa-envelope"></i> Inquire Now
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="courses-footer-note">
+          <p>
+            Don't see the course you're looking for?
+            <a href="#contact">Contact us</a> for custom training programs.
+          </p>
         </div>
       </div>
     </section>
@@ -498,9 +550,9 @@
               Introducing <span class="text-gradient-yellow">ZMS Solution</span>
             </h2>
             <p class="zms-description">
-              Our revolutionary Zone Management System - a comprehensive
+              Our revolutionary Zitopy Management System - a comprehensive
               platform designed to streamline business operations, enhance
-              productivity, and drive growth.
+              productivity, and drive growth for daily hustlers.
             </p>
 
             <div class="zms-features">
@@ -514,8 +566,8 @@
               <div class="zms-feature">
                 <i class="fas fa-users"></i>
                 <div class="feature-content">
-                  <h4>Team Management</h4>
-                  <p>Efficient workforce coordination</p>
+                  <h4>Client Management</h4>
+                  <p>Efficiently track your customers and appointments.</p>
                 </div>
               </div>
               <div class="zms-feature">
@@ -528,11 +580,7 @@
             </div>
 
             <div class="zms-cta">
-              <a
-                href="{{ url_for('zms.zms_index') }}"
-                target="_blank"
-                class="btn btn-primary btn-large"
-              >
+              <a href="#" target="_blank" class="btn btn-primary btn-large">
                 <i class="fas fa-rocket"></i>
                 Get ZMS Solution
               </a>
@@ -729,12 +777,30 @@
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; 2025 Zitopy Tech. All rights reserved.</p>
+          <p>© 2025 Zitopy Tech. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
+    <!-- Cart Preview Floating Box -->
+    <div id="cart-preview" class="cart-preview">
+      <button id="close-cart-preview" class="cart-preview-close">×</button>
+      <h4 class="cart-preview-title">Your Cart</h4>
+      <div id="cart-preview-items" class="cart-preview-items">
+        <!-- JS will populate this -->
+        <p class="empty-message">Your cart is empty.</p>
+      </div>
+      <div class="cart-preview-total">
+        <span>Total (Month)</span>
+        <span id="cart-preview-total-price">₦0</span>
+      </div>
+      <a href="{{ url_for('main.checkout') }}" class="btn btn-primary btn-block"
+        >Checkout</a
+      >
+    </div>
+
     <script src="{{ url_for('static', filename='js/flash/flash.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main/home.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main/checkout.js') }}"></script>
   </body>
 </html>

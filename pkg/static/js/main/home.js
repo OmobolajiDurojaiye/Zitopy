@@ -75,7 +75,7 @@ class ModernLandingPage {
     });
   }
 
-  // Mobile Navigation
+  // Mobile Navigation (UPDATED)
   setupMobileNavigation() {
     const menuOpen = document.getElementById("menuOpen");
     const menuClose = document.getElementById("menuClose");
@@ -87,35 +87,43 @@ class ModernLandingPage {
     }
     const navLinksItems = navLinks.querySelectorAll("a");
 
-    menuOpen.addEventListener("click", () => {
+    const openMenu = () => {
       navLinks.classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
+      document.body.classList.add("mobile-nav-active");
+    };
 
-    menuClose.addEventListener("click", () => {
+    const closeMenu = () => {
       navLinks.classList.remove("active");
-      document.body.style.overflow = "auto";
-    });
+      document.body.classList.remove("mobile-nav-active");
+    };
+
+    menuOpen.addEventListener("click", openMenu);
+    menuClose.addEventListener("click", closeMenu);
 
     // Close menu when clicking on a link
     navLinksItems.forEach((link) => {
       link.addEventListener("click", () => {
         if (navLinks.classList.contains("active")) {
-          navLinks.classList.remove("active");
-          document.body.style.overflow = "auto";
+          closeMenu();
         }
       });
     });
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside (on the overlay)
     document.addEventListener("click", (e) => {
       if (
         navLinks.classList.contains("active") &&
         !navLinks.contains(e.target) &&
         !menuOpen.contains(e.target)
       ) {
-        navLinks.classList.remove("active");
-        document.body.style.overflow = "auto";
+        closeMenu();
+      }
+    });
+
+    // Also handle Escape key to close
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navLinks.classList.contains("active")) {
+        closeMenu();
       }
     });
   }
@@ -277,75 +285,20 @@ class ModernLandingPage {
   }
 
   // // Form Handling
-  // setupFormHandling() {
-  //   const form = document.getElementById("contactForm");
-  //   if (form) {
-  //     form.addEventListener("submit", (e) => {
-  //       e.preventDefault();
+  setupFormHandling() {
+    const form = document.getElementById("contactForm");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        // e.preventDefault(); // Keep this commented to allow form submission to server
 
-  //       // Get form data
-  //       const formData = new FormData(form);
-  //       const data = Object.fromEntries(formData);
+        // Get form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+      });
 
-  //       // Show success message (without AJAX)
-  //       this.showNotification(
-  //         "Message sent successfully! We'll get back to you soon.",
-  //         "success"
-  //       );
-
-  //       // Reset form
-  //       form.reset();
-
-  //       // Remove floating labels by ensuring they revert to placeholder state
-  //       const inputs = form.querySelectorAll("input, select, textarea");
-  //       inputs.forEach((input) => {
-  //         const label = input.nextElementSibling;
-  //         if (label && label.tagName === "LABEL") {
-  //           // Trigger blur to reset label if field is empty
-  //           input.dispatchEvent(new Event("blur"));
-  //         }
-  //       });
-  //     });
-
-  //     // Form field animations (label floating)
-  //     const inputs = form.querySelectorAll("input, select, textarea");
-  //     inputs.forEach((input) => {
-  //       const label = input.nextElementSibling; // Assuming label is always next sibling
-  //       if (label && label.tagName === "LABEL") {
-  //         input.addEventListener("focus", () => {
-  //           label.style.top = "-0.5rem";
-  //           label.style.fontSize = "0.8rem";
-  //           label.style.color = "var(--primary-blue)";
-  //         });
-
-  //         input.addEventListener("blur", () => {
-  //           if (
-  //             (!input.value && input.tagName !== "SELECT") ||
-  //             (input.tagName === "SELECT" && input.value === "")
-  //           ) {
-  //             label.style.top = "1rem";
-  //             label.style.fontSize = "1rem"; // Ensure this matches the initial CSS state for the label
-  //             label.style.color = "var(--text-secondary)";
-  //           } else {
-  //             // If has value, keep label floated
-  //             label.style.top = "-0.5rem";
-  //             label.style.fontSize = "0.8rem";
-  //             label.style.color = "var(--primary-blue)";
-  //           }
-  //         });
-  //         // Initial check for pre-filled values (e.g. on page refresh with form data preserved)
-  //         if (
-  //           (input.value && input.tagName !== "SELECT") ||
-  //           (input.tagName === "SELECT" && input.value !== "")
-  //         ) {
-  //           label.style.top = "-0.5rem";
-  //           label.style.fontSize = "0.8rem";
-  //           label.style.color = "var(--primary-blue)";
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
+      // Form field animations (label floating) are handled by CSS
+    }
+  }
 
   // Notification System
   showNotification(message, type = "info") {
@@ -674,35 +627,9 @@ document.addEventListener("DOMContentLoaded", () => {
   landingPage.setupPerformanceOptimizations();
 
   // Add CSS styles dynamically for enhanced effects
-  // CAREFUL: Many of these are already in home.css. Duplicating or overriding can cause issues.
-  // The preloader color issue was caused by this block.
   const style = document.createElement("style");
   style.textContent = `
-        /* REMOVED: Loading Screen, Loader, Loading Text CSS from here as it's in home.css and caused color issue */
-        
-        /* Scroll Progress Bar - Already in home.css, ensure consistency or remove from one place */
-        /* .scroll-progress { ... } */
-        
-        /* Particles - Already in home.css */
-        /* .particles { ... } */
-        /* .particle { ... } */
-        
-        /* Cursor Follower - Already in home.css */
-        /* .cursor-follower { ... } */
-        
-        /* Typewriter Effect - CSS for caret is in home.css */
-        /* .typewriter { ... } */
-        
-        /* Glitch Effect - Already in home.css */
-        /* .glitch { ... } */
-        
-        /* Back to Top Button - Already in home.css */
-        /* .back-to-top { ... } */
-        
-        /* Reveal Animations - Already in home.css */
-        /* .reveal { ... } */
-        
-        /* Notification - These styles are fine here as they are for JS-generated element */
+        /* Notification - These styles are for the JS-generated element */
         .notification {
             display: flex;
             align-items: center;
@@ -714,36 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
             align-items: center;
             gap: 0.5rem;
         }
-
-        .notification.success { /* Example custom type, though JS sets background directly */
-            /* background: linear-gradient(135deg, #28a745, #20c997); */
-        }
         
-        .notification.info {  /* Example custom type */
-            /* background: linear-gradient(135deg, #17a2b8, #007bff); */
-        }
-        
-        /* Enhanced Card Animations - Prefer CSS :hover for these for performance and simplicity */
-        /* .service-card, .course-card, .solution-card { ... } */
-        
-        /* Responsive Enhancements - Already in home.css media queries */
-        /* @media (max-width: 768px) { ... } */
-        
-        /* Dark Mode Enhancements - Already in home.css */
-        /* .dark-mode .particle { ... } */
-        
-        /* Performance Optimizations (will-change) - Can be in home.css */
-        /* * { will-change: auto; } */
-        
-        /* Smooth Transitions for header - Already in home.css */
-        /* .header { ... } */
-        
-        /* Interactive Elements Enhancement (btn ripple) - JS now adds ripple, keyframes below */
-        /* .btn::before { ... } */ /* Original btn::before is for shine effect, keep it */
-        
-        /* Form Enhancements (label float) - Already in home.css and handled by JS focus/blur */
-        /* .form-group label { ... } */
-
         /* Ripple effect for interactive elements */
         .ripple {
             position: absolute;
@@ -763,7 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         /* Ensure dark mode scroll progress matches other dark mode elements if needed */
         .dark-mode .scroll-progress {
-             background: linear-gradient(90deg, var(--primary-blue), var(--primary-yellow)); /* Or a specific dark mode gradient */
+             background: linear-gradient(90deg, var(--primary-blue), var(--primary-yellow));
         }
     `;
 
@@ -788,21 +686,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize entrance animations
-  // setTimeout(animateOnLoad, 100); // This was too early, let load event handle it better
   window.addEventListener("load", () => {
     setTimeout(animateOnLoad, 100); // Small delay after load
-  });
-
-  // Enhanced keyboard navigation
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      // Close mobile menu
-      const navLinks = document.getElementById("navLinks");
-      const menuClose = document.getElementById("menuClose"); // Get the close button
-      if (navLinks && navLinks.classList.contains("active") && menuClose) {
-        menuClose.click(); // Simulate click on close button to ensure all cleanup happens
-      }
-    }
   });
 
   // Touch gesture support for mobile (Example - not fully implemented for actions)
@@ -888,10 +773,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add visual feedback (ripple) for interactive elements
   const interactiveElements = document.querySelectorAll(
     "button, .btn, a.nav-link, .service-link, .social-link, .footer-social a, .theme-toggle, .back-to-top"
-    // ".service-card, .course-card" // Ripples on large cards can be distracting
   );
   interactiveElements.forEach((element) => {
-    // Ensure parent is positioned for absolute children if not already
     if (getComputedStyle(element).position === "static") {
       element.style.position = "relative";
     }
@@ -899,11 +782,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     element.addEventListener("mousedown", function (e) {
       const ripple = document.createElement("span");
-      ripple.classList.add("ripple"); // Class for styling from JS-added CSS
+      ripple.classList.add("ripple");
 
       const rect = this.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
-      // Calculate click position relative to the element
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
 
@@ -913,7 +795,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       this.appendChild(ripple);
 
-      // Clean up ripple element after animation
       ripple.addEventListener("animationend", () => {
         ripple.remove();
       });
@@ -924,7 +805,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if ("performance" in window && "getEntriesByType" in performance) {
     window.addEventListener("load", () => {
       setTimeout(() => {
-        // Ensure all load events have fired
         const navEntries = performance.getEntriesByType("navigation");
         if (navEntries.length > 0) {
           const perfData = navEntries[0];

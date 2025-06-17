@@ -13,6 +13,7 @@ mail = Mail()
 
 @main_bp.route('/')
 def landing():
+    # return render_template('main/under_maintainance.html')
     return render_template('main/home.html')
 
 @main_bp.route('/contact', methods=['POST'])
