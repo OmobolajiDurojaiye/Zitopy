@@ -75,15 +75,14 @@ class ModernLandingPage {
     });
   }
 
-  // Mobile Navigation (CORRECTED)
+  // Mobile Navigation (REVISED for improved UX)
   setupMobileNavigation() {
     const menuToggleBtn = document.getElementById("menuOpen");
-    const menuCloseBtn = document.getElementById("menuClose");
     const navMenu = document.getElementById("navLinks");
 
-    if (!menuToggleBtn || !menuCloseBtn || !navMenu) {
+    if (!menuToggleBtn || !navMenu) {
       console.error(
-        "Mobile navigation elements not found: #menuOpen, #menuClose, or #navLinks"
+        "Mobile navigation elements not found: #menuOpen or #navLinks"
       );
       return;
     }
@@ -101,6 +100,8 @@ class ModernLandingPage {
     };
 
     const toggleMenu = () => {
+      // The hamburger button now handles both open and close.
+      // We check the menu's class to determine the current state.
       if (navMenu.classList.contains("active")) {
         closeMenu();
       } else {
@@ -108,18 +109,15 @@ class ModernLandingPage {
       }
     };
 
-    // Hamburger button toggles the menu
+    // Hamburger button toggles the menu.
     menuToggleBtn.addEventListener("click", toggleMenu);
 
-    // Close button inside the menu closes it
-    menuCloseBtn.addEventListener("click", closeMenu);
-
-    // Clicking on a nav link closes the menu
+    // Clicking on a nav link closes the menu.
     navLinks.forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
-    // Clicking outside the menu (on the overlay) closes it
+    // Clicking outside the menu (on the overlay) closes it.
     document.addEventListener("click", (e) => {
       if (
         navMenu.classList.contains("active") &&
@@ -130,7 +128,7 @@ class ModernLandingPage {
       }
     });
 
-    // Pressing the Escape key closes the menu
+    // Pressing the Escape key closes the menu.
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && navMenu.classList.contains("active")) {
         closeMenu();

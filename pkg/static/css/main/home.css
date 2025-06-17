@@ -390,16 +390,6 @@ body.mobile-nav-active .nav-toggle .hamburger-bar:nth-child(3) {
   transform: translateY(50%) rotate(-45deg);
 }
 
-.nav-close {
-  display: none;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-primary);
-}
-
 /* Hero Section */
 .hero {
   min-height: 100vh;
@@ -1535,10 +1525,6 @@ body.mobile-nav-active .nav-toggle .hamburger-bar:nth-child(3) {
 
   .nav-toggle {
     display: block; /* Show hamburger icon on mobile */
-  }
-
-  .nav-close {
-    display: block; /* Show close icon in the slide-out menu */
   }
 
   .nav-actions .btn-primary,
