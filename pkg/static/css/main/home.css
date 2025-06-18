@@ -1,7 +1,7 @@
 /* Root Styles */
 :root {
   --primary-blue: #0047a5;
-  --primary-yellow: #ffff05;
+  --primary-yellow: #cfcf0c;
   --text-color: #ffffff;
   --dark-bg: #121212;
   --light-bg: #f9f9f9;
@@ -9,7 +9,7 @@
   --dark-card: #1e1e1e;
   --light-card: #ffffff;
   --blue-gradient: linear-gradient(135deg, #0047a5 0%, #0066cc 100%);
-  --yellow-gradient: linear-gradient(135deg, #ffff05 0%, #ebeb2e 100%);
+  --yellow-gradient: linear-gradient(135deg, #cfcf0c 0%, #ebeb2e 100%);
   --card-shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
   --card-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;

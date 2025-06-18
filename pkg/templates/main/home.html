@@ -22,6 +22,22 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .course-discount {
+        padding: 0 25px;
+        margin-bottom: 15px;
+      }
+      .course-discount p {
+        font-size: 0.9rem;
+        color: var(--primary-yellow);
+        margin: 0;
+        text-align: center;
+        background-color: rgba(255, 255, 0, 0.05);
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 0, 0.1);
+      }
+    </style>
   </head>
   <body>
     <!-- Flash Messages Container -->
@@ -65,14 +81,14 @@
           </div>
 
           <div class="nav-actions">
-            <a
+            {#<a
               href="{{ url_for('main.checkout') }}"
               class="btn-cart"
               aria-label="View your shopping cart"
             >
               <i class="fas fa-shopping-cart"></i>
-              <span class="cart-badge">0</span>
-            </a>
+              <span class="cart-badge">0</span> </a
+            >#}
             <a href="#courses" class="btn btn-primary">START LEARNING</a>
             <!-- UPDATED: This button now acts as a toggle (open and close) -->
             <button class="nav-toggle" id="menuOpen" aria-label="Open menu">
@@ -219,7 +235,7 @@
             Our <span class="text-gradient-yellow">Flagship</span> Courses
           </h2>
           <p class="section-subtitle">
-            All our <span style="color: #ffff05">online live classes</span> come
+            All our <span style="color: #cfcf0c">online live classes</span> come
             with world-class mentorship and support.
           </p>
         </div>
@@ -257,23 +273,31 @@
                 </li>
               </ul>
             </div>
+            <div class="course-discount">
+              <p>
+                <i class="fas fa-tags"></i>
+                <strong>Accelerate your learning!</strong> Complete the course
+                in half the time and get a 10% discount on your fee.
+              </p>
+            </div>
             <div class="course-meta">
               <span><i class="fas fa-clock"></i> 8-12 Months</span>
               <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
             </div>
             <div class="course-pricing-v2">
-              <span class="price">₦160,000</span>
+              <span class="price">₦200,000</span>
               <span class="period">/ month</span>
             </div>
             <div class="course-actions">
-              <button
+              {#<button
                 class="btn btn-primary btn-block add-to-cart-btn"
                 data-course-id="1"
                 data-course-name="Full-Stack Development"
-                data-course-price="160000"
+                data-course-price="200000"
+                data-course-duration="8"
               >
-                <i class="fas fa-cart-plus"></i> Add to Cart
-              </button>
+                <i class="fas fa-cart-plus"></i> Add to Cart</button
+              >#}
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
@@ -314,6 +338,13 @@
                 </li>
               </ul>
             </div>
+            <div class="course-discount">
+              <p>
+                <i class="fas fa-tags"></i>
+                <strong>Accelerate your learning!</strong> Complete the course
+                in half the time and get a 10% discount on your fee.
+              </p>
+            </div>
             <div class="course-meta">
               <span><i class="fas fa-clock"></i> 4-6 Months</span>
               <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
@@ -323,14 +354,15 @@
               <span class="period">/ month</span>
             </div>
             <div class="course-actions">
-              <button
+              {#<button
                 class="btn btn-primary btn-block add-to-cart-btn"
                 data-course-id="2"
                 data-course-name="Front-End Development"
                 data-course-price="160000"
+                data-course-duration="4"
               >
-                <i class="fas fa-cart-plus"></i> Add to Cart
-              </button>
+                <i class="fas fa-cart-plus"></i> Add to Cart</button
+              >#}
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
@@ -371,6 +403,13 @@
                 </li>
               </ul>
             </div>
+            <div class="course-discount">
+              <p>
+                <i class="fas fa-tags"></i>
+                <strong>Accelerate your learning!</strong> Complete the course
+                in half the time and get a 10% discount on your fee.
+              </p>
+            </div>
             <div class="course-meta">
               <span><i class="fas fa-clock"></i> 4-6 Months</span>
               <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
@@ -380,14 +419,15 @@
               <span class="period">/ month</span>
             </div>
             <div class="course-actions">
-              <button
+              {#<button
                 class="btn btn-primary btn-block add-to-cart-btn"
                 data-course-id="3"
                 data-course-name="Backend Development"
                 data-course-price="180000"
+                data-course-duration="4"
               >
-                <i class="fas fa-cart-plus"></i> Add to Cart
-              </button>
+                <i class="fas fa-cart-plus"></i> Add to Cart</button
+              >#}
               <a
                 href="https://wa.me/message/W5LSLSWRYHUXA1"
                 target="_blank"
@@ -428,25 +468,37 @@
                 </li>
               </ul>
             </div>
+            <div class="course-discount">
+              <p>
+                <i class="fas fa-tags"></i>
+                <strong>Accelerate your learning!</strong> Complete the course
+                in half the time and get a 10% discount on your fee.
+              </p>
+            </div>
             <div class="course-meta">
-              <span><i class="fas fa-clock"></i> Custom Duration</span>
+              <span><i class="fas fa-clock"></i> 4-6 Months</span>
               <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
             </div>
             <div class="course-pricing-v2">
-              <span class="price">Contact Us</span>
-              <span class="period">for pricing</span>
+              <span class="price">₦160,000</span>
+              <span class="period">/ month</span>
             </div>
             <div class="course-actions">
-              <button
+              {#<button
                 class="btn btn-primary btn-block add-to-cart-btn"
                 data-course-id="4"
                 data-course-name="Crypto & Web3"
-                data-course-price="180000"
+                data-course-price="160000"
+                data-course-duration="4"
               >
-                <i class="fas fa-cart-plus"></i> Add to Cart
-              </button>
-              <a href="#contact" class="btn btn-outline btn-block">
-                <i class="fas fa-envelope"></i> Inquire Now
+                <i class="fas fa-cart-plus"></i> Add to Cart</button
+              >#}
+              <a
+                href="https://wa.me/message/W5LSLSWRYHUXA1"
+                target="_blank"
+                class="btn btn-outline btn-block"
+              >
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
               </a>
             </div>
           </div>
@@ -789,6 +841,7 @@
     </footer>
 
     <!-- Cart Preview Floating Box -->
+    {#
     <div id="cart-preview" class="cart-preview">
       <button id="close-cart-preview" class="cart-preview-close">×</button>
       <h4 class="cart-preview-title">Your Cart</h4>
@@ -804,6 +857,7 @@
         >Checkout</a
       >
     </div>
+    #}
 
     <script src="{{ url_for('static', filename='js/flash/flash.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main/home.js') }}"></script>

@@ -6,8 +6,6 @@ import logging
 import json
 
 logger = logging.getLogger(__name__)
-# Best practice is to initialize Mail in your app factory and import it
-# but following the existing pattern in routes.py
 mail = Mail()
 
 @main_bp.route('/checkout')
@@ -33,65 +31,100 @@ def create_order():
 
         cart_items = json.loads(cart_items_json)
         if not cart_items:
-            flash('Your cart is empty.', 'error')
+            flash('Your cart is empty. Please add a course to proceed.', 'error')
             return redirect(url_for('main.landing'))
 
-        total_amount = sum(item['price'] for item in cart_items)
+        # Recalculate total amount on the server for security
+        total_amount = sum(
+            int(item['monthly_price']) * int(item.get('quantity', 1))
+            for item in cart_items
+        )
 
         # Create the Order
         new_order = Order(
             customer_name=name,
             customer_email=email,
-            total_amount=total_amount
+            total_amount=total_amount,
+            status='pending'
         )
         db.session.add(new_order)
         
         # Create OrderItems and associate with the Order
         for item in cart_items:
-            # We assume the item['id'] from the cart is the course's database ID
-            # A more robust implementation might fetch the course from DB first
-            # to ensure data integrity, but this works for the current setup.
             order_item = OrderItem(
                 order=new_order,
                 course_id=item['id'],
                 course_title=item['name'],
-                price_at_purchase=item['price'],
-                quantity=item.get('quantity', 1)
+                price_at_purchase=item['monthly_price'], # This is the final monthly price
+                quantity=item.get('quantity', 1), # This is the number of months
+                payment_option=item.get('option', 'Standard Pace - Pay Monthly')
             )
             db.session.add(order_item)
             
         db.session.commit()
 
-        # Send notification email
+        # Send a more detailed notification email
         try:
             msg = Message(
-                subject=f"New Course Order from {name}",
+                subject=f"New Course Order #{new_order.id} from {name}",
                 sender=current_app.config['MAIL_USERNAME'],
                 recipients=[current_app.config['MAIL_USERNAME']] # Send to admin
             )
             
             items_html = ""
             for item in cart_items:
-                items_html += f"<li>{item['name']} - ₦{item['price']:,}</li>"
+                line_total = int(item['monthly_price']) * int(item.get('quantity', 1))
+                items_html += f"""
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px; vertical-align: top;">{item['name']}</td>
+                        <td style="padding: 10px; vertical-align: top;">{item.get('option', '')}</td>
+                        <td style="padding: 10px; text-align: right; vertical-align: top;">₦{int(item['monthly_price']):,}</td>
+                        <td style="padding: 10px; text-align: center; vertical-align: top;">{item.get('quantity', 1)}</td>
+                        <td style="padding: 10px; text-align: right; vertical-align: top;"><strong>₦{line_total:,}</strong></td>
+                    </tr>
+                """
 
             msg.html = f"""
-            <html><body>
-                <h2>New Course Order #{new_order.id}</h2>
-                <p><strong>Name:</strong> {name}</p>
-                <p><strong>Email:</strong> {email}</p>
-                <h3>Courses Ordered (First Month):</h3>
-                <ul>{items_html}</ul>
-                <h3>Total (Per Month): ₦{total_amount:,}</h3>
-                <p>Please follow up with the customer to arrange payment (Paystack etc.).</p>
-            </body></html>
+            <html>
+            <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; margin: 0; padding: 0; background-color: #f4f4f4;">
+                <div style="max-width: 700px; margin: 20px auto; border: 1px solid #ddd; padding: 30px; border-radius: 8px; background-color: #ffffff;">
+                    <h2 style="color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px;">New Course Order #{new_order.id}</h2>
+                    <p><strong>Customer Name:</strong> {name}</p>
+                    <p><strong>Customer Email:</strong> <a href="mailto:{email}" style="color: #0056b3;">{email}</a></p>
+                    <hr style="border: 0; border-top: 1px solid #eee;">
+                    <h3>Order Details:</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background-color: #f7f7f7;">
+                                <th style="padding: 12px; text-align: left;">Course</th>
+                                <th style="padding: 12px; text-align: left;">Plan Details</th>
+                                <th style="padding: 12px; text-align: right;">Monthly Rate</th>
+                                <th style="padding: 12px; text-align: center;">Months Paid</th>
+                                <th style="padding: 12px; text-align: right;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items_html}
+                        </tbody>
+                    </table>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin-top: 20px;">
+                    <div style="text-align: right; margin-top: 20px; font-size: 18px;">
+                        <strong>Total Amount Due: <span style="color: #28a745; font-size: 22px;">₦{total_amount:,}</span></strong>
+                    </div>
+                    <p style="margin-top: 30px; font-size: 14px; color: #555; background-color: #f0f8ff; padding: 15px; border-radius: 5px; border-left: 4px solid #0056b3;">
+                        <strong>Next Step:</strong> Please follow up with the customer to arrange payment and confirm their enrollment details.
+                    </p>
+                </div>
+            </body>
+            </html>
             """
             mail.send(msg)
         except Exception as email_error:
-            logger.error(f"Failed to send order notification email: {email_error}")
+            logger.error(f"Failed to send order notification email for order #{new_order.id}: {email_error}")
             # The order is saved, so we still show a success message to the user.
             # We just log the email failure.
 
-        flash('Your order has been placed! We will contact you shortly to arrange payment.', 'success')
+        flash('Your order has been placed! We will contact you shortly to arrange payment and finalize your enrollment.', 'success')
         return redirect(url_for('main.landing'))
 
     except Exception as e:

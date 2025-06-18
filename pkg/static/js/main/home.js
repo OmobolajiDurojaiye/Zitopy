@@ -688,10 +688,9 @@ document.addEventListener("DOMContentLoaded", () => {
       element.style.transition = `all 0.6s ease ${index * 0.1}s`; // Staggered delay
 
       setTimeout(() => {
-        // This timeout should align with the CSS transition delay
         element.style.opacity = "1";
         element.style.transform = "translateY(0)";
-      }, 1600 + index * 100); // Start after loading screen (1500ms) + a bit
+      }, 1600 + index * 100);
     });
   };
 

@@ -73,3 +73,4 @@ class OrderItem(db.Model):
     course_title = db.Column(db.String(100), nullable=False) # Denormalized for easy display
     price_at_purchase = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1) # For now, quantity will be 1 month
+    payment_option = db.Column(db.String(50), nullable=False, default='Standard Pace')
