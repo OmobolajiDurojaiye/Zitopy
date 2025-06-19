@@ -35,10 +35,7 @@ def create_order():
             return redirect(url_for('main.landing'))
 
         # Recalculate total amount on the server for security
-        total_amount = sum(
-            int(item['monthly_price']) * int(item.get('quantity', 1))
-            for item in cart_items
-        )
+        total_amount = sum(int(item['price']) for item in cart_items)
 
         # Create the Order
         new_order = Order(
@@ -51,13 +48,16 @@ def create_order():
         
         # Create OrderItems and associate with the Order
         for item in cart_items:
+            # The full plan name and duration for storage
+            full_plan_details = f"{item['planName']} ({item['duration']})"
+
             order_item = OrderItem(
                 order=new_order,
                 course_id=item['id'],
                 course_title=item['name'],
-                price_at_purchase=item['monthly_price'], # This is the final monthly price
-                quantity=item.get('quantity', 1), # This is the number of months
-                payment_option=item.get('option', 'Standard Pace - Pay Monthly')
+                price_at_purchase=item['price'], # This is the total price for the plan
+                quantity=1, # Quantity is always 1 for a plan package
+                payment_option=full_plan_details
             )
             db.session.add(order_item)
             
@@ -73,14 +73,15 @@ def create_order():
             
             items_html = ""
             for item in cart_items:
-                line_total = int(item['monthly_price']) * int(item.get('quantity', 1))
+                price_text = f"₦{int(item['price']):,}"
+                if item['duration'] == 'per month':
+                    price_text += " /mo"
+
                 items_html += f"""
                     <tr style="border-bottom: 1px solid #eee;">
                         <td style="padding: 10px; vertical-align: top;">{item['name']}</td>
-                        <td style="padding: 10px; vertical-align: top;">{item.get('option', '')}</td>
-                        <td style="padding: 10px; text-align: right; vertical-align: top;">₦{int(item['monthly_price']):,}</td>
-                        <td style="padding: 10px; text-align: center; vertical-align: top;">{item.get('quantity', 1)}</td>
-                        <td style="padding: 10px; text-align: right; vertical-align: top;"><strong>₦{line_total:,}</strong></td>
+                        <td style="padding: 10px; vertical-align: top;">{item['planName']} ({item['duration']})</td>
+                        <td style="padding: 10px; text-align: right; vertical-align: top;"><strong>{price_text}</strong></td>
                     </tr>
                 """
 
@@ -97,10 +98,8 @@ def create_order():
                         <thead>
                             <tr style="background-color: #f7f7f7;">
                                 <th style="padding: 12px; text-align: left;">Course</th>
-                                <th style="padding: 12px; text-align: left;">Plan Details</th>
-                                <th style="padding: 12px; text-align: right;">Monthly Rate</th>
-                                <th style="padding: 12px; text-align: center;">Months Paid</th>
-                                <th style="padding: 12px; text-align: right;">Subtotal</th>
+                                <th style="padding: 12px; text-align: left;">Selected Plan</th>
+                                <th style="padding: 12px; text-align: right;">Price</th>
                             </tr>
                         </thead>
                         <tbody>

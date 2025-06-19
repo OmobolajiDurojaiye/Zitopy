@@ -1,246 +1,186 @@
 "use strict";
 
+const CART_KEY = "zitopyCart";
+
+// --- Cart Management ---
+const getCart = () => {
+  const cart = localStorage.getItem(CART_KEY);
+  return cart ? JSON.parse(cart) : [];
+};
+
+const saveCart = (cart) => {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartUI();
+  renderCartPreview();
+};
+
+const addToCart = (coursePlan) => {
+  const cart = getCart();
+  // A user can only enroll in one course at a time.
+  // Check if the course (identified by id) is already in the cart.
+  const existingItem = cart.find((item) => item.id === coursePlan.id);
+
+  if (existingItem) {
+    showNotification(
+      `'${coursePlan.name}' is already in your cart. To choose a different plan, please remove it first.`,
+      "info"
+    );
+    return;
+  }
+
+  cart.push(coursePlan);
+  saveCart(cart);
+  showNotification(
+    `'${coursePlan.name} (${coursePlan.planName})' added to cart!`,
+    "success"
+  );
+
+  const cartPreview = document.getElementById("cart-preview");
+  if (cartPreview && !cartPreview.classList.contains("active")) {
+    cartPreview.classList.add("active");
+  }
+};
+
+const removeFromCart = (courseId) => {
+  let cart = getCart();
+  const courseName =
+    cart.find((item) => item.id === courseId)?.name || "Course";
+  cart = cart.filter((item) => item.id !== courseId);
+  saveCart(cart);
+  showNotification(`'${courseName}' removed from cart.`, "info");
+
+  // If on checkout page, re-render the summary
+  if (document.getElementById("summary-items-container")) {
+    renderCheckoutSummary();
+  }
+};
+
+// --- UI Updates ---
+const updateCartUI = () => {
+  const cart = getCart();
+  const cartBadges = document.querySelectorAll(".cart-badge");
+  cartBadges.forEach((badge) => {
+    badge.textContent = cart.length;
+    badge.style.display = cart.length > 0 ? "flex" : "none";
+  });
+};
+
 const recalculateTotal = () => {
   const totalEl = document.getElementById("summary-total-price");
   const cartItemsInput = document.getElementById("cart-items-input");
   const placeOrderBtn = document.getElementById("place-order-btn");
-  const summaryItems = document.querySelectorAll(".summary-item");
 
   if (!totalEl || !cartItemsInput || !placeOrderBtn) return;
 
-  let grandTotal = 0;
-  const finalCartItems = [];
-
-  summaryItems.forEach((itemEl) => {
-    const courseId = parseInt(itemEl.dataset.courseId, 10);
-    const basePrice = parseInt(itemEl.dataset.basePrice, 10);
-    const duration = parseInt(itemEl.dataset.duration, 10);
-    const courseName = itemEl.querySelector(".item-title").textContent;
-    const priceDisplay = itemEl.querySelector(".item-price");
-
-    // 1. Determine Monthly Price based on Pace
-    const paceSelect = itemEl.querySelector(".payment-option-select");
-    const isAccelerated = paceSelect.value === "accelerated";
-    const monthlyPrice = Math.round(
-      isAccelerated ? basePrice * 0.9 : basePrice
-    );
-
-    // 2. Determine Quantity based on Payment Plan
-    const planRadio = itemEl.querySelector('input[type="radio"]:checked');
-    let quantity = 1;
-    let planText = "Pay Monthly";
-
-    if (planRadio.value === "half") {
-      quantity = Math.ceil(duration / 2);
-      planText = `Pay First Half (${quantity} months)`;
-    } else if (planRadio.value === "full") {
-      quantity = duration;
-      planText = `Pay in Full (${quantity} months)`;
-    }
-
-    // 3. Calculate Line Total
-    const lineTotal = monthlyPrice * quantity;
-    grandTotal += lineTotal;
-
-    // 4. Update UI for this item
-    priceDisplay.innerHTML = `
-      <span class="price-total">₦${lineTotal.toLocaleString()}</span>
-      <small class="price-breakdown">@ ₦${monthlyPrice.toLocaleString()}/mo</small>
-    `;
-
-    // 5. Prepare data for backend
-    const paceText = isAccelerated ? "Accelerated Pace" : "Standard Pace";
-    finalCartItems.push({
-      id: courseId,
-      name: courseName,
-      monthly_price: monthlyPrice,
-      quantity: quantity,
-      option: `${paceText} - ${planText}`,
-    });
-  });
+  const cart = getCart();
+  const grandTotal = cart.reduce((total, item) => total + item.price, 0);
 
   // Update Grand Total and Form Input
   totalEl.textContent = `₦${grandTotal.toLocaleString()}`;
-  cartItemsInput.value = JSON.stringify(finalCartItems);
+  cartItemsInput.value = JSON.stringify(cart);
 
-  if (finalCartItems.length > 0) {
+  if (cart.length > 0) {
     placeOrderBtn.disabled = false;
-    placeOrderBtn.style.opacity = "1";
   } else {
     placeOrderBtn.disabled = true;
-    placeOrderBtn.style.opacity = "0.5";
     totalEl.textContent = "₦0";
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  const CART_KEY = "zitopyCart";
+const renderCheckoutSummary = () => {
+  const container = document.getElementById("summary-items-container");
+  if (!container) return;
 
-  // --- Cart Management ---
-  const getCart = () => {
-    const cart = localStorage.getItem(CART_KEY);
-    return cart ? JSON.parse(cart) : [];
-  };
+  const cart = getCart();
+  container.innerHTML = "";
 
-  const saveCart = (cart) => {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    updateCartUI();
-    renderCartPreview();
-  };
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <p class="empty-cart-message">
+        Your cart is empty. 
+        <a href="${window.location.origin}/#courses">Add a program</a> to continue.
+      </p>`;
+  } else {
+    cart.forEach((item) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = "summary-item";
+      itemEl.dataset.courseId = item.id;
 
-  const addToCart = (course) => {
-    const cart = getCart();
-    const existingItem = cart.find((item) => item.id === course.id);
+      const priceText =
+        item.duration === "per month"
+          ? `₦${item.price.toLocaleString()}/mo`
+          : `₦${item.price.toLocaleString()}`;
 
-    if (existingItem) {
-      showNotification(`'${course.name}' is already in your cart.`, "info");
-      return;
-    }
-
-    cart.push(course);
-    saveCart(cart);
-    showNotification(`'${course.name}' added to cart!`, "success");
-
-    const cartPreview = document.getElementById("cart-preview");
-    if (cartPreview) {
-      cartPreview.classList.add("active");
-    }
-  };
-
-  const removeFromCart = (courseId) => {
-    let cart = getCart();
-    const courseName =
-      cart.find((item) => item.id === courseId)?.name || "Course";
-    cart = cart.filter((item) => item.id !== courseId);
-    saveCart(cart);
-    showNotification(`'${courseName}' removed from cart.`, "info");
-
-    if (document.getElementById("summary-items-container")) {
-      renderCheckoutSummary();
-    }
-  };
-
-  // --- UI Updates ---
-  const updateCartUI = () => {
-    const cart = getCart();
-    const cartBadges = document.querySelectorAll(".cart-badge");
-    cartBadges.forEach((badge) => {
-      badge.textContent = cart.length;
-      badge.style.display = cart.length > 0 ? "flex" : "none";
+      itemEl.innerHTML = `
+        <div class="item-details">
+          <span class="item-title">${item.name}</span>
+          <span class="item-plan">${item.planName} (${item.duration})</span>
+        </div>
+        <span class="item-price">${priceText}</span>
+        <button class="remove-item-btn" data-course-id="${item.id}" title="Remove Item">×</button>
+      `;
+      container.appendChild(itemEl);
     });
-  };
+  }
+  recalculateTotal();
+};
 
-  const renderCheckoutSummary = () => {
-    const container = document.getElementById("summary-items-container");
-    if (!container) return;
+const renderCartPreview = () => {
+  const previewBox = document.getElementById("cart-preview");
+  const itemsContainer = document.getElementById("cart-preview-items");
+  const totalPriceEl = document.getElementById("cart-preview-total-price");
 
-    const cart = getCart();
-    container.innerHTML = "";
+  if (!previewBox || !itemsContainer || !totalPriceEl) return;
 
-    if (cart.length === 0) {
-      container.innerHTML = `
-        <p class="empty-cart-message">
-          Your cart is empty. 
-          <a href="${window.location.origin}/#courses">Add courses</a> to continue.
-        </p>`;
-    } else {
-      cart.forEach((item) => {
-        const itemEl = document.createElement("div");
-        itemEl.className = "summary-item";
-        itemEl.dataset.courseId = item.id;
-        itemEl.dataset.basePrice = item.price;
-        itemEl.dataset.duration = item.duration;
+  const cart = getCart();
+  itemsContainer.innerHTML = "";
 
-        itemEl.innerHTML = `
-          <div class="item-details">
-            <span class="item-title">${item.name}</span>
-            
-            <div class="checkout-option-group">
-              <label class="checkout-option-label">1. Choose Your Learning Pace:</label>
-              <select class="payment-option-select">
-                <option value="standard">Standard Pace (Full Duration)</option>
-                <option value="accelerated">Accelerated Pace (10% Off Monthly)</option>
-              </select>
-            </div>
-
-            <div class="checkout-option-group">
-              <label class="checkout-option-label">2. Choose Your Payment Plan:</label>
-              <div class="payment-plan-radios">
-                <label><input type="radio" name="plan-${
-                  item.id
-                }" value="monthly" checked> Pay Monthly</label>
-                <label><input type="radio" name="plan-${
-                  item.id
-                }" value="half"> Pay for First Half (${Math.ceil(
-          item.duration / 2
-        )} months)</label>
-                <label><input type="radio" name="plan-${
-                  item.id
-                }" value="full"> Pay in Full (${item.duration} months)</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="item-pricing-actions">
-            <div class="item-price">
-              <!-- Populated by JS -->
-            </div>
-            <button class="remove-item-btn" data-course-id="${
-              item.id
-            }" title="Remove Item">×</button>
-          </div>
-        `;
-        container.appendChild(itemEl);
-      });
-    }
-    recalculateTotal();
-  };
-
-  const renderCartPreview = () => {
-    const previewBox = document.getElementById("cart-preview");
-    const itemsContainer = document.getElementById("cart-preview-items");
-    const totalPriceEl = document.getElementById("cart-preview-total-price");
-
-    if (!previewBox || !itemsContainer || !totalPriceEl) return;
-
-    const cart = getCart();
-    itemsContainer.innerHTML = "";
-
-    if (cart.length === 0) {
-      itemsContainer.innerHTML =
-        '<p class="empty-message">Your cart is empty.</p>';
-      totalPriceEl.textContent = "₦0";
+  if (cart.length === 0) {
+    itemsContainer.innerHTML =
+      '<p class="empty-message">Your cart is empty.</p>';
+    totalPriceEl.textContent = "₦0";
+    if (previewBox.classList.contains("active")) {
       previewBox.classList.remove("active");
-    } else {
-      let total = 0;
-      cart.forEach((item) => {
-        const itemEl = document.createElement("div");
-        itemEl.className = "cart-preview-item";
-        itemEl.innerHTML = `
-          <span class="cart-preview-item-name">${item.name}</span>
-          <span class="cart-preview-item-price">₦${item.price.toLocaleString()}</span>
-        `;
-        itemsContainer.appendChild(itemEl);
-        total += item.price;
-      });
-      totalPriceEl.textContent = `₦${total.toLocaleString()}`;
     }
-  };
+  } else {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-  // --- Event Listeners ---
+    cart.forEach((item) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = "cart-preview-item";
+      const priceText = item.duration === "per month" ? "/mo" : "total";
+
+      itemEl.innerHTML = `
+        <div class="cart-preview-item-details">
+            <span class="cart-preview-item-name">${item.name}</span>
+            <span class="cart-preview-item-plan">${item.planName}</span>
+        </div>
+        <span class="item-price">₦${item.price.toLocaleString()}${priceText}</span>
+      `;
+      itemsContainer.appendChild(itemEl);
+    });
+    totalPriceEl.textContent = `₦${total.toLocaleString()}`;
+  }
+};
+
+// --- Event Listeners ---
+document.addEventListener("DOMContentLoaded", () => {
+  // Add-to-cart buttons
   document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
-      const course = {
+      const coursePlan = {
         id: parseInt(e.currentTarget.dataset.courseId, 10),
         name: e.currentTarget.dataset.courseName,
-        price: parseInt(e.currentTarget.dataset.coursePrice, 10),
-        duration: parseInt(e.currentTarget.dataset.courseDuration, 10),
+        planName: e.currentTarget.dataset.planName,
+        price: parseInt(e.currentTarget.dataset.planPrice, 10),
+        duration: e.currentTarget.dataset.planDuration,
       };
-      addToCart(course);
+      addToCart(coursePlan);
     });
   });
 
+  // Global click listener for remove buttons
   document.body.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("remove-item-btn")) {
       const courseId = parseInt(e.target.dataset.courseId, 10);
@@ -248,17 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Listen for changes on selects and radio buttons
-  document.body.addEventListener("change", (e) => {
-    if (
-      e.target &&
-      (e.target.classList.contains("payment-option-select") ||
-        e.target.type === "radio")
-    ) {
-      recalculateTotal();
-    }
-  });
-
+  // Close cart preview
   const closeCartPreviewBtn = document.getElementById("close-cart-preview");
   if (closeCartPreviewBtn) {
     closeCartPreviewBtn.addEventListener("click", () => {
@@ -269,6 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Checkout form submission
   const checkoutForm = document.getElementById("checkout-form");
   if (checkoutForm) {
     checkoutForm.addEventListener("submit", (e) => {
@@ -278,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showNotification("Cannot place an order with an empty cart.", "error");
         return;
       }
-      recalculateTotal();
+      // Clear the cart on successful submission to prevent re-ordering
       localStorage.removeItem(CART_KEY);
     });
   }
@@ -286,18 +217,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Initialization ---
   updateCartUI();
   renderCartPreview();
-  if (getCart().length > 0) {
-    const cartPreview = document.getElementById("cart-preview");
-    if (cartPreview) {
-      cartPreview.classList.add("active");
-    }
-  }
-
   if (document.querySelector(".checkout-section")) {
     renderCheckoutSummary();
   }
 });
 
+// --- Helper Functions ---
 function showNotification(message, type = "info") {
   const container = document.querySelector(".flash-messages");
   if (!container) return;
@@ -308,11 +233,13 @@ function showNotification(message, type = "info") {
   container.insertBefore(notification, container.firstChild);
 
   setTimeout(() => {
-    notification.classList.add("visible");
+    notification.style.opacity = 1;
+    notification.style.transform = "translateY(0)";
   }, 10);
 
   setTimeout(() => {
-    notification.classList.remove("visible");
+    notification.style.opacity = 0;
+    notification.style.transform = "translateY(-20px)";
     setTimeout(() => notification.remove(), 500);
   }, 4000);
 }

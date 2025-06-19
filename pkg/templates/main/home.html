@@ -81,14 +81,14 @@
           </div>
 
           <div class="nav-actions">
-            {#<a
+            <a
               href="{{ url_for('main.checkout') }}"
               class="btn-cart"
               aria-label="View your shopping cart"
             >
               <i class="fas fa-shopping-cart"></i>
-              <span class="cart-badge">0</span> </a
-            >#}
+              <span class="cart-badge">0</span>
+            </a>
             <a href="#courses" class="btn btn-primary">START LEARNING</a>
             <!-- UPDATED: This button now acts as a toggle (open and close) -->
             <button class="nav-toggle" id="menuOpen" aria-label="Open menu">
@@ -232,281 +232,446 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">
-            Our <span class="text-gradient-yellow">Flagship</span> Courses
+            Our <span class="text-gradient-yellow">Flagship</span> Programs
           </h2>
           <p class="section-subtitle">
-            All our <span style="color: #cfcf0c">online live classes</span> come
-            with world-class mentorship and support.
+            All our <span style="color: #cfcf0c">online live classes</span> are
+            hands-on and include world-class mentorship to ensure your success.
+            Each course features flexible payment plans to fit your needs.
           </p>
         </div>
 
-        <div class="courses-grid-new">
-          <!-- Full-Stack Web Development -->
-          <div class="course-card-v2" data-aos="fade-up">
-            <div class="course-header">
-              <div class="course-icon-v2">
-                <i class="fas fa-layer-group"></i>
+        <!-- Full-Stack Development Offering -->
+        <div class="course-offering" data-aos="fade-up">
+          <div class="course-offering-header">
+            <h3><i class="fas fa-layer-group"></i> Full-Stack Development</h3>
+            <p>
+              Become a complete, job-ready developer by mastering both
+              client-side and server-side engineering. You'll build complex,
+              database-driven applications from scratch. (Duration: 8-12 Months)
+            </p>
+          </div>
+          <div class="pricing-table">
+            <div class="pricing-row header">
+              <div>Plan</div>
+              <div>Best For</div>
+              <div>Pricing</div>
+              <div>Bonus / Discount</div>
+              <div>Action</div>
+            </div>
+            <!-- Standard Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>Standard Plan</strong>
+                <p>8–12 Months</p>
               </div>
-              <h3 class="course-title-v2">Full-Stack Development</h3>
-              <p class="course-description-v2">
-                Become a versatile developer by mastering both front-end and
-                back-end technologies.
-              </p>
+              <div data-label="Best For">
+                <p>Flexible pace & full mentorship</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦200,000</span>
+                <p class="price-note">per month</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p>—</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="1"
+                  data-course-name="Full-Stack Development"
+                  data-plan-name="Standard Plan"
+                  data-plan-price="200000"
+                  data-plan-duration="per month"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
-            <div class="course-details">
-              <h4>You'll get access to:</h4>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Personalized Learning
-                  Plans
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Hands-On Projects &
-                  Assignments
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Certificate of Completion
-                </li>
-              </ul>
+            <!-- 6-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>6-Month Upfront</strong>
+                <p>6 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Committed learners seeking savings</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦1,150,000</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ₦50K!</strong> + 50% Off Job Prep Toolkit</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="1"
+                  data-course-name="Full-Stack Development"
+                  data-plan-name="6-Month Upfront Plan"
+                  data-plan-price="1150000"
+                  data-plan-duration="6 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
-            <div class="course-discount">
-              <p>
-                <i class="fas fa-tags"></i>
-                <strong>Accelerate your learning!</strong> Complete the course
-                in half the time and get a 10% discount on your fee.
-              </p>
-            </div>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 8-12 Months</span>
-              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
-            </div>
-            <div class="course-pricing-v2">
-              <span class="price">₦200,000</span>
-              <span class="period">/ month</span>
-            </div>
-            <div class="course-actions">
-              {#<button
-                class="btn btn-primary btn-block add-to-cart-btn"
-                data-course-id="1"
-                data-course-name="Full-Stack Development"
-                data-course-price="200000"
-                data-course-duration="8"
-              >
-                <i class="fas fa-cart-plus"></i> Add to Cart</button
-              >#}
-              <a
-                href="https://wa.me/message/W5LSLSWRYHUXA1"
-                target="_blank"
-                class="btn btn-outline btn-block"
-              >
-                <i class="fab fa-whatsapp"></i> Order on WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <!-- Front-end Development -->
-          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="100">
-            <div class="course-header">
-              <div class="course-icon-v2"><i class="fas fa-desktop"></i></div>
-              <h3 class="course-title-v2">Front-End Development</h3>
-              <p class="course-description-v2">
-                Build beautiful, responsive, and interactive user interfaces
-                with modern frameworks.
-              </p>
-            </div>
-            <div class="course-details">
-              <h4>You'll get access to:</h4>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Personalized Learning
-                  Plans
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Hands-On Projects &
-                  Assignments
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Certificate of Completion
-                </li>
-              </ul>
-            </div>
-            <div class="course-discount">
-              <p>
-                <i class="fas fa-tags"></i>
-                <strong>Accelerate your learning!</strong> Complete the course
-                in half the time and get a 10% discount on your fee.
-              </p>
-            </div>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 4-6 Months</span>
-              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
-            </div>
-            <div class="course-pricing-v2">
-              <span class="price">₦160,000</span>
-              <span class="period">/ month</span>
-            </div>
-            <div class="course-actions">
-              {#<button
-                class="btn btn-primary btn-block add-to-cart-btn"
-                data-course-id="2"
-                data-course-name="Front-End Development"
-                data-course-price="160000"
-                data-course-duration="4"
-              >
-                <i class="fas fa-cart-plus"></i> Add to Cart</button
-              >#}
-              <a
-                href="https://wa.me/message/W5LSLSWRYHUXA1"
-                target="_blank"
-                class="btn btn-outline btn-block"
-              >
-                <i class="fab fa-whatsapp"></i> Order on WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <!-- Backend Development -->
-          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-header">
-              <div class="course-icon-v2"><i class="fas fa-server"></i></div>
-              <h3 class="course-title-v2">Backend Development</h3>
-              <p class="course-description-v2">
-                Power applications with robust server-side logic, APIs, and
-                database management.
-              </p>
-            </div>
-            <div class="course-details">
-              <h4>You'll get access to:</h4>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Personalized Learning
-                  Plans
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Hands-On Projects &
-                  Assignments
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Certificate of Completion
-                </li>
-              </ul>
-            </div>
-            <div class="course-discount">
-              <p>
-                <i class="fas fa-tags"></i>
-                <strong>Accelerate your learning!</strong> Complete the course
-                in half the time and get a 10% discount on your fee.
-              </p>
-            </div>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 4-6 Months</span>
-              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
-            </div>
-            <div class="course-pricing-v2">
-              <span class="price">₦180,000</span>
-              <span class="period">/ month</span>
-            </div>
-            <div class="course-actions">
-              {#<button
-                class="btn btn-primary btn-block add-to-cart-btn"
-                data-course-id="3"
-                data-course-name="Backend Development"
-                data-course-price="180000"
-                data-course-duration="4"
-              >
-                <i class="fas fa-cart-plus"></i> Add to Cart</button
-              >#}
-              <a
-                href="https://wa.me/message/W5LSLSWRYHUXA1"
-                target="_blank"
-                class="btn btn-outline btn-block"
-              >
-                <i class="fab fa-whatsapp"></i> Order on WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <!-- Crypto Teaching -->
-          <div class="course-card-v2" data-aos="fade-up" data-aos-delay="300">
-            <div class="course-header">
-              <div class="course-icon-v2"><i class="fab fa-bitcoin"></i></div>
-              <h3 class="course-title-v2">Crypto & Web3</h3>
-              <p class="course-description-v2">
-                Learn what powers digital currencies and how the decentralized
-                world is taking shape, in a way that's easy to understand.
-              </p>
-            </div>
-            <div class="course-details">
-              <h4>You'll get access to:</h4>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Experienced Mentors</li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Personalized Learning
-                  Plans
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Hands-On Projects &
-                  Assignments
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Flexible Class Scheduling
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Certificate of Completion
-                </li>
-              </ul>
-            </div>
-            <div class="course-discount">
-              <p>
-                <i class="fas fa-tags"></i>
-                <strong>Accelerate your learning!</strong> Complete the course
-                in half the time and get a 10% discount on your fee.
-              </p>
-            </div>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 4-6 Months</span>
-              <span><i class="fas fa-calendar-alt"></i> 2 Classes/Week</span>
-            </div>
-            <div class="course-pricing-v2">
-              <span class="price">₦160,000</span>
-              <span class="period">/ month</span>
-            </div>
-            <div class="course-actions">
-              {#<button
-                class="btn btn-primary btn-block add-to-cart-btn"
-                data-course-id="4"
-                data-course-name="Crypto & Web3"
-                data-course-price="160000"
-                data-course-duration="4"
-              >
-                <i class="fas fa-cart-plus"></i> Add to Cart</button
-              >#}
-              <a
-                href="https://wa.me/message/W5LSLSWRYHUXA1"
-                target="_blank"
-                class="btn btn-outline btn-block"
-              >
-                <i class="fab fa-whatsapp"></i> Order on WhatsApp
-              </a>
+            <!-- Full Payment Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>Full Payment</strong>
+                <p>12 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Fully committed, career-focused</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦2,250,000</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ₦150K!</strong> + Free Job Prep Toolkit</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="1"
+                  data-course-name="Full-Stack Development"
+                  data-plan-name="Full Payment (12M)"
+                  data-plan-price="2250000"
+                  data-plan-duration="12 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Backend Development Offering -->
+        <div class="course-offering" data-aos="fade-up">
+          <div class="course-offering-header">
+            <h3><i class="fas fa-server"></i> Backend Development</h3>
+            <p>
+              Master server-side logic, databases, and APIs to build the
+              powerful core of web applications. (Duration: 4-6 Months)
+            </p>
+          </div>
+          <div class="pricing-table">
+            <div class="pricing-row header">
+              <div>Plan</div>
+              <div>Best For</div>
+              <div>Pricing</div>
+              <div>Bonus / Discount</div>
+              <div>Action</div>
+            </div>
+            <!-- Standard Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>Standard Plan</strong>
+                <p>4–6 Months</p>
+              </div>
+              <div data-label="Best For">
+                <p>Flexible monthly learning</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦180,000</span>
+                <p class="price-note">per month</p>
+              </div>
+              <div data-label="Bonus/Discount"><p>—</p></div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="2"
+                  data-course-name="Backend Development"
+                  data-plan-name="Standard Plan"
+                  data-plan-price="180000"
+                  data-plan-duration="per month"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 3-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>3-Month Upfront</strong>
+                <p>3 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Quick start with great savings</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦499,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦40K!</strong> + Free Portfolio Review</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="2"
+                  data-course-name="Backend Development"
+                  data-plan-name="3-Month Upfront Plan"
+                  data-plan-price="499999"
+                  data-plan-duration="3 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 6-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>6-Month Upfront</strong>
+                <p>6 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Best value for full commitment</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦999,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦80K!</strong> + 50% Off Job Prep Toolkit</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="2"
+                  data-course-name="Backend Development"
+                  data-plan-name="6-Month Upfront Plan"
+                  data-plan-price="999999"
+                  data-plan-duration="6 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Front-End Development Offering -->
+        <div class="course-offering" data-aos="fade-up">
+          <div class="course-offering-header">
+            <h3><i class="fas fa-desktop"></i> Front-End Development</h3>
+            <p>
+              Specialize in creating beautiful, responsive, and interactive user
+              interfaces that users love. (Duration: 4-6 Months)
+            </p>
+          </div>
+          <div class="pricing-table">
+            <div class="pricing-row header">
+              <div>Plan</div>
+              <div>Best For</div>
+              <div>Pricing</div>
+              <div>Bonus / Discount</div>
+              <div>Action</div>
+            </div>
+            <!-- Standard Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>Standard Plan</strong>
+                <p>4–6 Months</p>
+              </div>
+              <div data-label="Best For">
+                <p>Flexible monthly learning</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦160,000</span>
+                <p class="price-note">per month</p>
+              </div>
+              <div data-label="Bonus/Discount"><p>—</p></div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="3"
+                  data-course-name="Front-End Development"
+                  data-plan-name="Standard Plan"
+                  data-plan-price="160000"
+                  data-plan-duration="per month"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 3-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>3-Month Upfront</strong>
+                <p>3 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Quick start with great savings</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦449,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦30K!</strong> + Free Portfolio Review</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="3"
+                  data-course-name="Front-End Development"
+                  data-plan-name="3-Month Upfront Plan"
+                  data-plan-price="449999"
+                  data-plan-duration="3 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 6-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>6-Month Upfront</strong>
+                <p>6 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Best value for full commitment</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦899,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦60K!</strong> + 50% Off Job Prep Toolkit</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="3"
+                  data-course-name="Front-End Development"
+                  data-plan-name="6-Month Upfront Plan"
+                  data-plan-price="899999"
+                  data-plan-duration="6 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crypto/Web3 Offering -->
+        <div class="course-offering" data-aos="fade-up">
+          <div class="course-offering-header">
+            <h3><i class="fab fa-bitcoin"></i> Crypto & Web3</h3>
+            <p>
+              Dive into the future of the internet. Learn about blockchain,
+              cryptocurrency trading, and decentralized applications. (Duration:
+              4-6 Months)
+            </p>
+          </div>
+          <div class="pricing-table">
+            <div class="pricing-row header">
+              <div>Plan</div>
+              <div>Best For</div>
+              <div>Pricing</div>
+              <div>Bonus / Discount</div>
+              <div>Action</div>
+            </div>
+            <!-- Standard Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>Standard Plan</strong>
+                <p>4–6 Months</p>
+              </div>
+              <div data-label="Best For">
+                <p>Flexible monthly learning</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦160,000</span>
+                <p class="price-note">per month</p>
+              </div>
+              <div data-label="Bonus/Discount"><p>—</p></div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="4"
+                  data-course-name="Crypto & Web3"
+                  data-plan-name="Standard Plan"
+                  data-plan-price="160000"
+                  data-plan-duration="per month"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 3-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>3-Month Upfront</strong>
+                <p>3 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Beginners testing the waters</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦449,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦30K!</strong> + Free Portfolio Review</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="4"
+                  data-course-name="Crypto & Web3"
+                  data-plan-name="3-Month Upfront Plan"
+                  data-plan-price="449999"
+                  data-plan-duration="3 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <!-- 6-Month Upfront Plan -->
+            <div class="pricing-row">
+              <div data-label="Plan">
+                <strong>6-Month Upfront</strong>
+                <p>6 Months Access</p>
+              </div>
+              <div data-label="Best For">
+                <p>Best value for full commitment</p>
+              </div>
+              <div data-label="Pricing">
+                <span class="price-total">₦899,999</span>
+                <p class="price-note">one-time payment</p>
+              </div>
+              <div data-label="Bonus/Discount">
+                <p><strong>Save ~₦60K!</strong> + 50% Off Job Prep Toolkit</p>
+              </div>
+              <div data-label="Action">
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  data-course-id="4"
+                  data-course-name="Crypto & Web3"
+                  data-plan-name="6-Month Upfront Plan"
+                  data-plan-price="899999"
+                  data-plan-duration="6 Months"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="courses-footer-note">
           <p>
-            Don't see the course you're looking for?
-            <a href="#contact">Contact us</a> for custom training programs.
+            All programs include <i class="fas fa-clock"></i> at least
+            <strong>2hrs/week of live instruction</strong>, hands-on projects,
+            and a certificate of completion. <br />
+            Have questions? <a href="#contact">Contact us</a> for a personal
+            consultation.
           </p>
         </div>
       </div>
@@ -841,7 +1006,7 @@
     </footer>
 
     <!-- Cart Preview Floating Box -->
-    {#
+
     <div id="cart-preview" class="cart-preview">
       <button id="close-cart-preview" class="cart-preview-close">×</button>
       <h4 class="cart-preview-title">Your Cart</h4>
@@ -850,14 +1015,13 @@
         <p class="empty-message">Your cart is empty.</p>
       </div>
       <div class="cart-preview-total">
-        <span>Total (Month)</span>
+        <span>Total Due</span>
         <span id="cart-preview-total-price">₦0</span>
       </div>
       <a href="{{ url_for('main.checkout') }}" class="btn btn-primary btn-block"
         >Checkout</a
       >
     </div>
-    #}
 
     <script src="{{ url_for('static', filename='js/flash/flash.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main/home.js') }}"></script>

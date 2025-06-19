@@ -87,8 +87,6 @@ class ModernLandingPage {
       return;
     }
 
-    const navLinks = navMenu.querySelectorAll("a");
-
     const openMenu = () => {
       navMenu.classList.add("active");
       document.body.classList.add("mobile-nav-active");
@@ -112,10 +110,8 @@ class ModernLandingPage {
     // Hamburger button toggles the menu.
     menuToggleBtn.addEventListener("click", toggleMenu);
 
-    // Clicking on a nav link closes the menu.
-    navLinks.forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
+    // NOTE: Clicking on a nav link to scroll and close the menu is now handled
+    // in setupSmoothScrolling() to ensure both actions work correctly.
 
     // Clicking outside the menu (on the overlay) closes it.
     document.addEventListener("click", (e) => {
@@ -214,17 +210,27 @@ class ModernLandingPage {
     observer.observe(document.body, { attributes: true });
   }
 
-  // Smooth Scrolling
+  // Smooth Scrolling (UPDATED to handle mobile nav closing)
   setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
         const targetId = this.getAttribute("href");
-        // Fix for href="#" or href="#/" if used for top links
         const targetElement =
           targetId === "#" || targetId === "#/"
             ? document.body
             : document.querySelector(targetId);
+
+        // If the link is inside the mobile nav, close the menu
+        const navMenu = document.getElementById("navLinks");
+        if (
+          navMenu &&
+          navMenu.classList.contains("active") &&
+          navMenu.contains(this)
+        ) {
+          navMenu.classList.remove("active");
+          document.body.classList.remove("mobile-nav-active");
+        }
 
         if (targetElement) {
           // For body, scroll to top

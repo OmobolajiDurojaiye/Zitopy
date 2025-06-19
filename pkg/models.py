@@ -71,6 +71,6 @@ class OrderItem(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
     course_title = db.Column(db.String(100), nullable=False) # Denormalized for easy display
-    price_at_purchase = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1) # For now, quantity will be 1 month
-    payment_option = db.Column(db.String(50), nullable=False, default='Standard Pace')
+    price_at_purchase = db.Column(db.Integer, nullable=False) # Total price for the selected plan
+    quantity = db.Column(db.Integer, nullable=False, default=1) # Will always be 1 (represents one plan/package)
+    payment_option = db.Column(db.String(100), nullable=False) # e.g., "Starter Plan (3 Months)"
